@@ -16,4 +16,5 @@ if(main.check_pin(ch.get_chosen(), card)):
     mo = meop.menuOperations()
     mo.print(card)
 else:
+    print('Попробуйте ещё раз позже!')
     exit()

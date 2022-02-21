@@ -14,19 +14,16 @@ class MainScreen:
         next = 0
         flag = 0
         for i in range(3, 0, -1):
-            #flag = self.check_str(new_pin, old)
             try:
-
                 new_pin = int(input('Введите пароль: '))
                 if old == new_pin:
                     flag = 1
                     next = 1
                     break
-                #if int(new_pin) > 9999 or flag == 0:
-                 #   print('Недопустимый ввод пин-код')
+                else:
+                    print('Неверный пин-код. Попробуйте ещё раз!')
             except :
-                print('Попробуйте еще раз!')
-                print('неверный пин-код. Осталось попыток: ' + str(i - 1))
+                print('Неверный пин-код. Осталось попыток: ' + str(i - 1))
 
             if flag == 0:
                 next = 0
