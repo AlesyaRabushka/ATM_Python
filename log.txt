@@ -2,3 +2,7 @@
 Operation type: Данные банковской карты
 Status: Success
 
+21-02-2022  21:00:55
+Operation type: Завершение работы
+Status: Success
+
