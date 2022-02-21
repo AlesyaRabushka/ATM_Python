@@ -5,7 +5,7 @@ import card as ca
 import chosen
 import menuoperations as meop
 
-main = ms.mainscreen()
+main = ms.MainScreen()
 ch = chosen.Chosen()
 ch.operations()
 card = ca.Card(ch.get_chosen())
