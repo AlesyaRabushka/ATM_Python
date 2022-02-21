@@ -9,7 +9,7 @@ main = ms.mainscreen()
 ch = chosen.Chosen()
 ch.operations()
 card = ca.Card(ch.get_chosen())
-
+#
 
 # если пароль правильный - РАБОТА ИДЕТ
 if(main.check_pin(ch.get_chosen(), card)):
