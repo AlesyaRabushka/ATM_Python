@@ -29,6 +29,7 @@ class Bank:
         file.close()
 
     # копирование данных о карточке
+
     def copy_data(self):
         card = open("card.txt", "r")
         new_card = open("newcard.txt", "w")

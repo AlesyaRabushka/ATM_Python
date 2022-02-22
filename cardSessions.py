@@ -1,21 +1,21 @@
-from card import Card
-from singleton import Singleton
 # операции с карточкой
 
-class giveMoney(Singleton):
+
+class GiveMoney:
     """выдача наличных"""
-    def money_out(self, card, money: int):
+    @staticmethod
+    def money_out(card, money: int, single_t):
         card.copy_data()
 
         if money > int(card.get_balance()) or money < 0:
-            self.log('Выдача наличных', False)
+            single_t.log('Выдача наличных', False)
         else:
             new_money = int(card.get_balance()) - money
             l = int(card.get_chosen()) - 1
             from_card = open('newcard.txt')
             to_card = open('card.txt', 'w')
 
-            self.log('Выдача наличных', True)
+            single_t.log('Выдача наличных', True)
             k1 = from_card.readline()
             to_card.write(k1)
             for i in range(0, int(k1)):
@@ -45,9 +45,11 @@ class giveMoney(Singleton):
             from_card.close()
             to_card.close()
 
-class changePin(Singleton):
+
+class ChangePin:
     """смена пин-код"""
-    def changeCardPin(self, card, pin: int):
+    @staticmethod
+    def change_card_pin(self, card, pin: int, single_t):
         flag = 0
         for i in range(3, 0, -1):
             old_pin = int(input('Введите старый пароль: '))
@@ -99,15 +101,17 @@ class changePin(Singleton):
                     break
                 else:
                     print('Попробуйте еще раз!')
-                    self.log('Смена пин-код', False)
+                    single_t.log('Смена пин-код', False)
 
-class getMoney(Singleton):
+
+class GetMoney:
     """пополнение денежных средств"""
-    def moneyIn(self, card):
+    @staticmethod
+    def money_in(card, single_t):
         money = int(input('Вставьте купюру: '))
         new_money = int(card.get_balance()) + money
         l = int(card.get_chosen()) - 1
-        self.log('Пополнение счета', True)
+        single_t.log('Пополнение счета', True)
         from_card = open('newcard.txt')
         to_card = open('card.txt', 'w')
 
@@ -140,7 +144,8 @@ class getMoney(Singleton):
         from_card.close()
         to_card.close()
 
-class Currency():
+
+class Currency:
     """валютные операции"""
     def print(self):
         print('КУРС ВАЛЮТ')
@@ -228,16 +233,20 @@ class Currency():
             from_card.close()
             to_card.close()
 
-class Telephone(giveMoney):
+
+class Telephone(GiveMoney):
     """оплата телефона"""
-    def pay(self, card, money: int, tel_number: int):
-        self.money_out(card, money)
-        self.copy_data()
+    @staticmethod
+    def pay(card, money: int, tel_number: int, single_t):
+        GiveMoney.money_out(card, money, single_t)
+        Telephone.copy_data()
+
         from_card = open('newtelephone.txt', 'r')
         to_card = open('telephone.txt', 'w')
         k = from_card.readline()
         to_card.write(k)
-        self.log('Пополнение средств телефона', True)
+        single_t.log('Пополнение средств телефона', True)
+
         for i in range(0, int(k)):
             if i == tel_number - 1:
                 number = from_card.readline()
@@ -251,7 +260,8 @@ class Telephone(giveMoney):
         from_card.close()
         to_card.close()
 
-    def copy_data(self):
+    @staticmethod
+    def copy_data():
         card = open("telephone.txt", "r")
         new_card = open("newtelephone.txt", "w")
 

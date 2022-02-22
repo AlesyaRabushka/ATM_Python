@@ -14,7 +14,6 @@ if chosen.operations():
     # загрузка инфы о выбранной карточке
     card = Card(chosen.get_chosen())
 
-
     # проверка пин-код
     # если успешно, вывод список опций
     if MainScreen.check_pin(chosen.get_chosen(), card):

@@ -1,6 +1,6 @@
-from cardSessions import giveMoney
-from cardSessions import changePin
-from cardSessions import getMoney
+from cardSessions import GiveMoney
+from cardSessions import ChangePin
+from cardSessions import GetMoney
 from cardSessions import Telephone
 
 
@@ -26,9 +26,8 @@ class MenuOperations:
 
             # выдача наличных
             elif k == 2:
-                gvm = giveMoney()
                 money = int(input("Введите сумму выдачи: "))
-                gvm.money_out(card, money)
+                GiveMoney.money_out(card, money, single_t)
 
             # валютные операции
             elif k == 3:
@@ -49,13 +48,11 @@ class MenuOperations:
 
             # смена пин-код
             elif k == 4:
-                chp = changePin()
-                chp.changeCardPin(card,card.get_pin())
+                ChangePin.change_card_pin(card,card.get_pin(), single_t)
 
             # пополнение средств
             elif k == 5:
-                gtm = getMoney()
-                gtm.moneyIn(card)
+                GetMoney.money_in(card, single_t)
 
             # выход из проги
             elif k == 0:
