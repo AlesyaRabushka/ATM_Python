@@ -31,12 +31,11 @@ class MenuOperations:
 
             # валютные операции
             elif k == 3:
-                t = Telephone()
                 print('1 - +375 44 730 81 28\n2 - +375 33 895 12 04\n3 - +375 25 234 10 23')
                 tel = int(input('Выберите номер телефона: '))
                 if tel == 1 or tel == 2 or tel == 3:
                     money = int(input("Введите сумму платежа: "))
-                    t.pay(card, money, tel)
+                    Telephone.pay(card, money, tel, single_t)
                 else:
                     print('\tНеверный номер операции. Повторите попытку позже.\n')
                     single_t.log('Пополнение счета телефона', False)
