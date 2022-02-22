@@ -7,3 +7,4 @@
 3) банкнота
 4) Card -> Bank??
 5) класс Exception?
+6) логирование в ChangePin
