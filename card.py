@@ -1,6 +1,5 @@
 from bank import Bank
 from chosen import Chosen
-from singleton import Singleton
 
 
 class Card(Bank, Chosen):

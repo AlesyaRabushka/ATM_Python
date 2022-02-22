@@ -1,8 +1,8 @@
-21-02-2022  20:46:54
-Operation type: Данные банковской карты
+22-02-2022  21:56:29
+Operation type: Вход в систему
 Status: Success
 
-21-02-2022  21:00:55
-Operation type: Завершение работы
+22-02-2022  21:56:30
+Operation type: Данные банковской карты
 Status: Success
 

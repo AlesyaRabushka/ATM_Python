@@ -1,20 +1,28 @@
-import bankomat as b
-import bank as ba
-import mainscreen as ms
-import card as ca
-import chosen
-import menuoperations as meop
+from mainscreen import MainScreen
+from card import Card
+from chosen import Chosen
+from menuoperations import MenuOperations
+from singleton import Singleton
 
-main = ms.MainScreen()
-ch = chosen.Chosen()
-ch.operations()
-card = ca.Card(ch.get_chosen())
-#
+# объект singleton
+single_t = Singleton()
+# приветствие
+MainScreen.show()
+# выбор карточки
+chosen = Chosen()
+if chosen.operations():
+    # загрузка инфы о выбранной карточке
+    card = Card(chosen.get_chosen())
 
-# если пароль правильный - РАБОТА ИДЕТ
-if(main.check_pin(ch.get_chosen(), card)):
-    mo = meop.menuOperations()
-    mo.print(card)
+
+    # проверка пин-код
+    # если успешно, вывод список опций
+    if MainScreen.check_pin(chosen.get_chosen(), card):
+        single_t.log('Вход в систему', True)
+        MenuOperations.print(card, single_t)
+    else:
+        single_t.log('Вход в систему', False)
+        print('Попробуйте ещё раз позже!')
+        exit()
 else:
-    print('Попробуйте ещё раз позже!')
     exit()

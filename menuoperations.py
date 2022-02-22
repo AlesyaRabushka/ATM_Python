@@ -1,12 +1,14 @@
-from card import Card
 from cardSessions import giveMoney
 from cardSessions import changePin
 from cardSessions import getMoney
 from cardSessions import Telephone
-from singleton import Singleton
 
-class menuOperations(Singleton):
-    def print(self, Card):
+
+class MenuOperations:
+    """меню опций"""
+
+    @staticmethod
+    def print(card, single_t):
         while 1 == 1:
             print("\tВыберите операцию:")
             print("\t1 - Данные банковской карты")
@@ -19,14 +21,14 @@ class menuOperations(Singleton):
 
             # данные о карточке
             if k == 1:
-                Card.print()
-                self.log('Данные банковской карты', True)
+                card.print()
+                single_t.log('Данные банковской карты', True)
 
             # выдача наличных
             elif k == 2:
                 gvm = giveMoney()
                 money = int(input("Введите сумму выдачи: "))
-                gvm.money_out(Card, money)
+                gvm.money_out(card, money)
 
             # валютные операции
             elif k == 3:
@@ -35,10 +37,10 @@ class menuOperations(Singleton):
                 tel = int(input('Выберите номер телефона: '))
                 if tel == 1 or tel == 2 or tel == 3:
                     money = int(input("Введите сумму платежа: "))
-                    t.pay(Card, money, tel)
+                    t.pay(card, money, tel)
                 else:
                     print('\tНеверный номер операции. Повторите попытку позже.\n')
-                    self.log('Пополнение счета телефона', False)
+                    single_t.log('Пополнение счета телефона', False)
                 """cur = Currency()
                 money = cur.print()
                 print('Money = ', end = ' ')
@@ -48,14 +50,16 @@ class menuOperations(Singleton):
             # смена пин-код
             elif k == 4:
                 chp = changePin()
-                chp.changeCardPin(Card,Card.get_pin())
+                chp.changeCardPin(card,card.get_pin())
 
             # пополнение средств
             elif k == 5:
                 gtm = getMoney()
-                gtm.moneyIn(Card)
+                gtm.moneyIn(card)
 
             # выход из проги
             elif k == 0:
-                self.log('Завершение работы', True)
+                single_t.log('Завершение работы', True)
                 exit()
+            else:
+                print('Неверный номер операции')

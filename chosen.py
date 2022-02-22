@@ -1,9 +1,6 @@
-from singleton import Singleton
-
-
-class Chosen():
-    def __init__(self):
-        self.chosen = 0
+class Chosen:
+    """выбор карточки"""
+    chosen = 0
 
     def set_chosen(self, number: int):
         self.chosen = number
@@ -11,7 +8,7 @@ class Chosen():
     def get_chosen(self) -> int:
         return self.chosen
 
-    def operations(self):
+    def operations(self) -> bool:
         # print('Выберите карточку:')
         print('\t1 - ALESIA RABUSHKA')
         print('\t2 - ALEKSEY SMELOV')
@@ -20,12 +17,16 @@ class Chosen():
         if n == 1:
             self.set_chosen(1)
            # self.log('Вход в систему', True)
+            return True
         elif n == 2:
             self.set_chosen(2)
            # self.log('Вход в систему', True)
+            return True
         elif n == 3:
             self.set_chosen(3)
           #  self.log('Вход в систему', True)
+            return True
         else:
             print('Неверный код операции')
+            return False
            # self.log('Вход в систему', False)
