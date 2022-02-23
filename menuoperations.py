@@ -47,7 +47,7 @@ class MenuOperations:
 
             # смена пин-код
             elif k == 4:
-                ChangePin.change_card_pin(card,card.get_pin(), single_t)
+                ChangePin.change_card_pin(card, card.get_pin(), single_t)
 
             # пополнение средств
             elif k == 5:
@@ -55,7 +55,7 @@ class MenuOperations:
 
             # выход из проги
             elif k == 0:
-                single_t.log('Завершение работы', True)
+                single_t.log('Выход из системы', True)
                 exit()
             else:
                 print('Неверный номер операции')

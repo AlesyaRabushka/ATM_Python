@@ -1,28 +1,48 @@
-22-02-2022  21:56:29
+23-02-2022  22:25:14
 Operation type: Вход в систему
 Status: Success
 
-22-02-2022  21:56:30
+23-02-2022  22:25:17
 Operation type: Данные банковской карты
 Status: Success
 
-22-02-2022  22:10:58
+23-02-2022  22:25:21
+Operation type: Смена пин-код
+Status: Fail
+
+23-02-2022  22:26:17
 Operation type: Вход в систему
 Status: Success
 
-22-02-2022  22:10:59
+23-02-2022  22:26:24
+Operation type: Cмена пин-код
+Status: Success
+
+23-02-2022  22:26:31
+Operation type: Смена пин-код
+Status: Fail
+
+23-02-2022  22:26:34
+Operation type: Смена пин-код
+Status: Fail
+
+23-02-2022  22:26:45
+Operation type: Выход из системы
+Status: Success
+
+23-02-2022  22:27:50
+Operation type: Вход в систему
+Status: Success
+
+23-02-2022  22:27:52
 Operation type: Данные банковской карты
 Status: Success
 
-22-02-2022  22:11:03
-Operation type: Выдача наличных
+23-02-2022  22:27:58
+Operation type: Cмена пин-код
 Status: Success
 
-22-02-2022  22:11:04
-Operation type: Данные банковской карты
-Status: Success
-
-22-02-2022  22:11:05
-Operation type: Завершение работы
+23-02-2022  22:28:00
+Operation type: Выход из системы
 Status: Success
 

@@ -49,21 +49,22 @@ class GiveMoney:
 class ChangePin:
     """смена пин-код"""
     @staticmethod
-    def change_card_pin(self, card, pin: int, single_t):
+    def change_card_pin(card, pin: int, single_t):
         flag = 0
         for i in range(3, 0, -1):
             old_pin = int(input('Введите старый пароль: '))
 
-            if int(pin) == old_pin:
+            if pin == old_pin:
                 flag = 1
                 card.copy_data()
                 new_pin = int(input('Введите новый пин-код: '))
                 try:
                     if new_pin > 9999:
-                        print('неправильно')
+                        single_t.log('Cмена пин-код', False)
                     card.set_pin(new_pin)
+                    single_t.log('Cмена пин-код', True)
                 except:
-                    print('no no')
+                    single_t.log('Cмена пин-код', False)
                 from_card = open('newcard.txt')
                 to_card = open('card.txt', 'w')
                 l = int(card.get_chosen()) - 1
@@ -96,12 +97,15 @@ class ChangePin:
                 to_card.close()
                 break
             else:
-                flag = 0
                 if i - 1 == 0:
+                    flag = 0
                     break
                 else:
+                    flag = 0
                     print('Попробуйте еще раз!')
                     single_t.log('Смена пин-код', False)
+        if flag == 0:
+            print('Попробуйте позже!')
 
 
 class GetMoney:
@@ -245,7 +249,7 @@ class Telephone(GiveMoney):
         to_card = open('telephone.txt', 'w')
         k = from_card.readline()
         to_card.write(k)
-        single_t.log('Пополнение средств телефона', True)
+        single_t.log('Пополнение счета телефона', True)
 
         for i in range(0, int(k)):
             if i == tel_number - 1:
