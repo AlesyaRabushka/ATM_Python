@@ -171,7 +171,8 @@ class GetMoney(Bank):
         from_card.close()
         to_card.close()
 
-
+# валютные операции
+# пока пусть будут
 class Currency:
     """валютные операции"""
     def print(self):

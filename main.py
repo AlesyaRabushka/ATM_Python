@@ -12,7 +12,7 @@ MainScreen.show_welcom_screen()
 
 # выбор карточки
 chosen = Chosen()
-if chosen.operations():
+if chosen.choose_card():
     # загрузка инфы о выбранной карточке
     card = Card(chosen.get_chosen())
 

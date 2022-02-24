@@ -1,5 +1,7 @@
 class Chosen:
-    """выбор карточки"""
+    """выбор карточки
+        нужен для поиска карточки в процессе изменения пин-код или кард-счёта
+    """
     chosen = 0
 
     def set_chosen(self, number: int):
@@ -8,8 +10,8 @@ class Chosen:
     def get_chosen(self) -> int:
         return self.chosen
 
-    def operations(self) -> bool:
-        # print('Выберите карточку:')
+    # выбор карты
+    def choose_card(self) -> bool:
         print('\t1 - ALESIA RABUSHKA')
         print('\t2 - ALEKSEY SMELOV')
         print('\t3 - ALENA SKLEMA')
