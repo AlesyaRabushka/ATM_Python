@@ -9,7 +9,7 @@ class MenuOperations(Bank):
     """меню опций"""
 
     @staticmethod
-    def print(card, single_t):
+    def print_menu(card, single_t):
         # приезжают инкассаторы и кладут денежку в банкомат
         storage = Bank()
         storage.set_storage(10000)
@@ -29,7 +29,7 @@ class MenuOperations(Bank):
 
             # данные о карточке
             if k == 1:
-                card.print()
+                card.print_card_info()
                 single_t.log('Данные банковской карты', True)
 
             # выдача наличных

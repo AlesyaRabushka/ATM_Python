@@ -16,17 +16,13 @@ class Chosen:
         n = int(input())
         if n == 1:
             self.set_chosen(1)
-           # self.log('Вход в систему', True)
             return True
         elif n == 2:
             self.set_chosen(2)
-           # self.log('Вход в систему', True)
             return True
         elif n == 3:
             self.set_chosen(3)
-          #  self.log('Вход в систему', True)
             return True
         else:
             print('Неверный код операции')
             return False
-           # self.log('Вход в систему', False)

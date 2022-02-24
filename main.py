@@ -6,8 +6,10 @@ from singleton import Singleton
 
 # объект singleton
 single_t = Singleton()
+
 # приветствие
-MainScreen.show()
+MainScreen.show_welcom_screen()
+
 # выбор карточки
 chosen = Chosen()
 if chosen.operations():
@@ -15,13 +17,15 @@ if chosen.operations():
     card = Card(chosen.get_chosen())
 
     # проверка пин-код
-    # если успешно, вывод список опций
+    # если успешно -> выводит список опций
     if MainScreen.check_pin(chosen.get_chosen(), card):
         single_t.log('Вход в систему', True)
-        MenuOperations.print(card, single_t)
+        MenuOperations.print_menu(card, single_t)
     else:
         single_t.log('Вход в систему', False)
         print('Попробуйте ещё раз позже!')
         exit()
+
+# если введен несуществующий номер (порядковый) карточки
 else:
     exit()

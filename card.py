@@ -8,10 +8,10 @@ class Card(Bank, Chosen):
         self.chosen = chosen
         user = chosen - 1
         file = open('card.txt')
-        k = int(file.readline())
+        amount = int(file.readline())
 
         # ищем именно ту карточку, которую выбрали
-        for i in range(0, k):
+        for i in range(0, amount):
             if i == user:
                 card_number = file.readline()
                 self.set_number(card_number)
@@ -26,6 +26,7 @@ class Card(Bank, Chosen):
                 balance = int(file.readline())
                 self.set_balance(balance)
             else:
+                # если невыбранная карточка, просто считываем, но нигде не сохраняем эти данные
                 card_number = file.readline()
                 data = file.readline()
                 holder = file.readline()
@@ -50,7 +51,7 @@ class Card(Bank, Chosen):
                     print('*', end='')
 
     # вывод на экран данные карточки
-    def print(self):
+    def print_card_info(self):
         print('\t\t-----------------')
         print('\t\t Данные карточки')
         print('\t\t-----------------')

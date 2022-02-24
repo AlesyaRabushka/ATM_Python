@@ -1,6 +1,5 @@
 # операции с карто
 import os
-
 from bank import Bank
 
 
@@ -18,21 +17,24 @@ class GiveMoney(Bank):
                 print('\tНедостаточно средств\n')
                 single_t.log('Выдача наличных', False)
             else:
+                # изменяем количество средств хранилища
                 self.set_storage(storage - money)
                 f_storage = open('bank.txt', 'w')
                 f_storage.write(str(self.get_storage()))
                 f_storage.close()
 
+                # поиск и изменение средств карточки
                 new_money = int(card.get_balance()) - money
-                l = int(card.get_chosen()) - 1
+                user = int(card.get_chosen()) - 1
                 from_card = open('newcard.txt')
                 to_card = open('card.txt', 'w')
-
                 single_t.log('Выдача наличных', True)
-                k1 = from_card.readline()
-                to_card.write(k1)
-                for i in range(0, int(k1)):
-                    if i == l:
+                amount = from_card.readline()
+                to_card.write(amount)
+
+                # поиск нужной нам карточки (записи)
+                for i in range(0, int(amount)):
+                    if i == user:
                         from_card.readline()
                         from_card.readline()
                         from_card.readline()
@@ -79,12 +81,13 @@ class ChangePin:
                         card.set_pin(new_pin)
                         single_t.log('Cмена пин-код', True)
 
+                        # изменение средств на самой карточке
                         from_card = open('newcard.txt')
                         to_card = open('card.txt', 'w')
                         user = int(card.get_chosen()) - 1
-                        k = from_card.readline()
-                        to_card.write(str(k))
-                        for j in range(0, int(k)):
+                        amount = from_card.readline()
+                        to_card.write(str(amount))
+                        for j in range(0, int(amount)):
                             if j == user:
                                 from_card.readline()
                                 from_card.readline()
@@ -139,9 +142,9 @@ class GetMoney(Bank):
         # изменение данных о средствах пользователя
         from_card = open('newcard.txt')
         to_card = open('card.txt', 'w')
-        k = from_card.readline()
-        to_card.write(k)
-        for i in range(0, int(k)):
+        amount = from_card.readline()
+        to_card.write(amount)
+        for i in range(0, int(amount)):
             if i == find:
                 from_card.readline()
                 from_card.readline()

@@ -182,3 +182,7 @@ Status: Success
 Operation type: Выход из системы
 Status: Success
 
+24-02-2022  17:53:57
+Operation type: Вход в систему
+Status: Fail
+
