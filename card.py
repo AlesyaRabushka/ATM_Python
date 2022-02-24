@@ -3,14 +3,16 @@ from chosen import Chosen
 
 
 class Card(Bank, Chosen):
+    """карточка"""
     def __init__(self, chosen):
         self.chosen = chosen
-        find = chosen - 1
+        user = chosen - 1
         file = open('card.txt')
         k = int(file.readline())
 
+        # ищем именно ту карточку, которую выбрали
         for i in range(0, k):
-            if i == find:
+            if i == user:
                 card_number = file.readline()
                 self.set_number(card_number)
                 data = file.readline()
@@ -24,7 +26,7 @@ class Card(Bank, Chosen):
                 balance = int(file.readline())
                 self.set_balance(balance)
             else:
-                ard_number = file.readline()
+                card_number = file.readline()
                 data = file.readline()
                 holder = file.readline()
                 pin = int(file.readline())
@@ -32,15 +34,17 @@ class Card(Bank, Chosen):
                 balance = int(file.readline())
         file.close()
 
-    def secret(self, s):
+    # скрытие номера карточки, кроме последних 4х цифр
+    @staticmethod
+    def number_hiding(card_number):
         space = 0
-        for i in range(0, len(s)):
+        for i in range(0, len(card_number)):
             if space == 3:
-                print(s[i] + s[i+1] + s[i+2] + s[i+3])
+                print(card_number[i] + card_number[i+1] + card_number[i+2] + card_number[i+3])
                 break
             else:
-                if s[i] == ' ':
-                    print(end = ' ')
+                if card_number[i] == ' ':
+                    print(end=' ')
                     space += 1
                 else:
                     print('*', end='')
@@ -51,11 +55,11 @@ class Card(Bank, Chosen):
         print('\t\t Данные карточки')
         print('\t\t-----------------')
 
-        print('\tНомер карточки: ', end = ' ')
-        self.secret(self.get_number())
-        print('\tВладелец карточки: ', end = ' ')
-        print(self.get_holder(), end = '')
+        print('\tНомер карточки: ', end=' ')
+        self.number_hiding(self.get_number())
+        print('\tВладелец карточки: ', end=' ')
+        print(self.get_holder(), end='')
         print('\tСрок эксплуатации: ', end=' ')
-        print(self.get_data(), end ='')
+        print(self.get_data(), end='')
         print('\tДоступные средства: ', end=' ')
-        print(self.get_balance())
+        print(self.get_balance(), end='\n')

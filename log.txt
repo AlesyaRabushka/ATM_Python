@@ -74,3 +74,111 @@ Status: Fail
 Operation type: Выход из системы
 Status: Success
 
+24-02-2022  17:18:33
+Operation type: Вход в систему
+Status: Success
+
+24-02-2022  17:18:35
+Operation type: Данные банковской карты
+Status: Success
+
+24-02-2022  17:18:42
+Operation type: Смена пин-код
+Status: Fail
+
+24-02-2022  17:18:45
+Operation type: Смена пин-код
+Status: Fail
+
+24-02-2022  17:18:52
+Operation type: Выход из системы
+Status: Success
+
+24-02-2022  17:20:15
+Operation type: Вход в систему
+Status: Success
+
+24-02-2022  17:20:19
+Operation type: Смена пин-код
+Status: Fail
+
+24-02-2022  17:20:22
+Operation type: Смена пин-код
+Status: Fail
+
+24-02-2022  17:20:23
+Operation type: Смена пин-код
+Status: Fail
+
+24-02-2022  17:21:48
+Operation type: Вход в систему
+Status: Success
+
+24-02-2022  17:21:53
+Operation type: Смена пин-код
+Status: Fail
+
+24-02-2022  17:22:13
+Operation type: Cмена пин-код
+Status: Fail
+
+24-02-2022  17:22:13
+Operation type: Cмена пин-код
+Status: Success
+
+24-02-2022  17:22:16
+Operation type: Выход из системы
+Status: Success
+
+24-02-2022  17:23:11
+Operation type: Вход в систему
+Status: Success
+
+24-02-2022  17:23:17
+Operation type: Cмена пин-код
+Status: Fail
+
+24-02-2022  17:23:26
+Operation type: Смена пин-код
+Status: Fail
+
+24-02-2022  17:26:14
+Operation type: Вход в систему
+Status: Success
+
+24-02-2022  17:26:19
+Operation type: Cмена пин-код
+Status: Fail
+
+24-02-2022  17:26:26
+Operation type: Cмена пин-код
+Status: Success
+
+24-02-2022  17:26:27
+Operation type: Данные банковской карты
+Status: Success
+
+24-02-2022  17:26:32
+Operation type: Выход из системы
+Status: Success
+
+24-02-2022  17:45:15
+Operation type: Вход в систему
+Status: Success
+
+24-02-2022  17:45:20
+Operation type: Данные банковской карты
+Status: Success
+
+24-02-2022  17:45:30
+Operation type: Выдача наличных
+Status: Success
+
+24-02-2022  17:45:30
+Operation type: Пополнение счета телефона
+Status: Success
+
+24-02-2022  17:45:32
+Operation type: Выход из системы
+Status: Success
+

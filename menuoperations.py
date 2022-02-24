@@ -38,22 +38,17 @@ class MenuOperations(Bank):
                 give_money = GiveMoney()
                 give_money.money_out(card, money, single_t)
 
-            # валютные операции
+            # оплата телефона
             elif k == 3:
                 print('1 - +375 44 730 81 28\n2 - +375 33 895 12 04\n3 - +375 25 234 10 23')
                 tel = int(input('Выберите номер телефона: '))
                 if tel == 1 or tel == 2 or tel == 3:
                     money = int(input("Введите сумму платежа: "))
                     telephone = Telephone()
-                    telephone.pay(card, money, tel, single_t)
+                    telephone.telephone_pay(card, money, tel, single_t)
                 else:
                     print('\tНеверный номер операции. Повторите попытку позже.\n')
                     single_t.log('Пополнение счета телефона', False)
-                """cur = Currency()
-                money = cur.print()
-                print('Money = ', end = ' ')
-                print(money)
-                cur.moneyOut(Card, money)"""
 
             # смена пин-код
             elif k == 4:
