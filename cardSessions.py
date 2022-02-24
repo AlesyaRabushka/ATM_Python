@@ -1,4 +1,6 @@
 # операции с карто
+import os
+
 from bank import Bank
 
 
@@ -9,10 +11,11 @@ class GiveMoney(Bank):
         storage = self.get_storage()
 
         if money > storage:
-            print('Лимит средств привышен!')
+            print('\tЛимит средств привышен!\n')
             single_t.log('Выдача наличных', False)
         else:
             if money > int(card.get_balance()) or money < 0:
+                print('\tНедостаточно средств\n')
                 single_t.log('Выдача наличных', False)
             else:
                 self.set_storage(storage - money)
@@ -62,60 +65,64 @@ class ChangePin:
     def change_card_pin(card, pin: int, single_t):
         flag = 0
         for i in range(3, 0, -1):
-            old_pin = int(input('Введите старый пароль: '))
+            try:
+                old_pin = int(input('Введите старый пин-код: '))
 
-            if pin == old_pin:
-                flag = 1
-                card.copy_data()
-                new_pin = int(input('Введите новый пин-код: '))
-                try:
-                    if new_pin > 9999:
+                if pin == old_pin:
+                    flag = 1
+                    card.copy_data()
+                    try:
+                        new_pin = int(input('Введите новый пин-код: '))
+                        if len(str(new_pin)) > 4:
+                            single_t.log('Cмена пин-код', False)
+                        card.set_pin(new_pin)
+                        single_t.log('Cмена пин-код', True)
+                    except:
                         single_t.log('Cмена пин-код', False)
-                    card.set_pin(new_pin)
-                    single_t.log('Cмена пин-код', True)
-                except:
-                    single_t.log('Cмена пин-код', False)
-                from_card = open('newcard.txt')
-                to_card = open('card.txt', 'w')
-                l = int(card.get_chosen()) - 1
 
-                k = from_card.readline()
-                to_card.write(str(k))
-                for i in range(0, int(k)):
-                    if i == l:
-                        from_card.readline()
-                        from_card.readline()
-                        from_card.readline()
-                        from_card.readline()
-                        from_card.readline()
-                        from_card.readline()
+                    from_card = open('newcard.txt')
+                    to_card = open('card.txt', 'w')
+                    l = int(card.get_chosen()) - 1
 
-                        to_card.write(card.get_number())
-                        to_card.write(card.get_data())
-                        to_card.write(card.get_holder())
-                        to_card.write(str(card.get_pin()) + '\n')
-                        to_card.write(card.get_cvv())
-                        to_card.write(str(card.get_balance()) + '\n')
-                    else:
-                        to_card.write(from_card.readline())
-                        to_card.write(from_card.readline())
-                        to_card.write(from_card.readline())
-                        to_card.write(from_card.readline())
-                        to_card.write(from_card.readline())
-                        to_card.write(from_card.readline())
-                from_card.close()
-                to_card.close()
-                break
-            else:
-                if i - 1 == 0:
-                    flag = 0
+                    k = from_card.readline()
+                    to_card.write(str(k))
+                    for i in range(0, int(k)):
+                        if i == l:
+                            from_card.readline()
+                            from_card.readline()
+                            from_card.readline()
+                            from_card.readline()
+                            from_card.readline()
+                            from_card.readline()
+
+                            to_card.write(card.get_number())
+                            to_card.write(card.get_data())
+                            to_card.write(card.get_holder())
+                            to_card.write(str(card.get_pin()) + '\n')
+                            to_card.write(card.get_cvv())
+                            to_card.write(str(card.get_balance()) + '\n')
+                        else:
+                            to_card.write(from_card.readline())
+                            to_card.write(from_card.readline())
+                            to_card.write(from_card.readline())
+                            to_card.write(from_card.readline())
+                            to_card.write(from_card.readline())
+                            to_card.write(from_card.readline())
+                    from_card.close()
+                    to_card.close()
+                    os.remove('newcard.txt')
                     break
                 else:
-                    flag = 0
-                    print('Попробуйте еще раз!')
-                    single_t.log('Смена пин-код', False)
-        if flag == 0:
-            print('Попробуйте позже!')
+                    if i - 1 == 0:
+                        flag = 0
+                        break
+                    else:
+                        flag = 0
+                        print('Попробуйте еще раз!')
+                        single_t.log('Смена пин-код', False)
+            except:
+                print('Попробуйте еще раз!')
+                single_t.log('Смена пин-код', False)
 
 
 class GetMoney(Bank):
@@ -256,9 +263,9 @@ class Currency:
 
 class Telephone(GiveMoney):
     """оплата телефона"""
-    @staticmethod
-    def pay(card, money: int, tel_number: int, single_t):
-        GiveMoney.money_out(card, money, single_t)
+
+    def pay(self, card, money: int, tel_number: int, single_t):
+        self.money_out(card, money, single_t)
         Telephone.copy_data()
 
         from_card = open('newtelephone.txt', 'r')

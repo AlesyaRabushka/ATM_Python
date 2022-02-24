@@ -1,3 +1,6 @@
+import os
+
+
 class Bank:
     """хранилище денег"""
     def __init__(self):
