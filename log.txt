@@ -22,3 +22,11 @@ Status: Success
 Operation type: Выдача наличных
 Status: Success
 
+24-02-2022  13:06:11
+Operation type: Вход в систему
+Status: Success
+
+24-02-2022  13:06:12
+Operation type: Выход из системы
+Status: Success
+
