@@ -1,49 +1,59 @@
-# операции с карточкой
+# операции с карто
+from bank import Bank
 
 
-class GiveMoney:
+class GiveMoney(Bank):
     """выдача наличных"""
-    @staticmethod
-    def money_out(card, money: int, single_t):
+    def money_out(self, card, money: int, single_t):
         card.copy_data()
+        storage = self.get_storage()
 
-        if money > int(card.get_balance()) or money < 0:
+        if money > storage:
+            print('Лимит средств привышен!')
             single_t.log('Выдача наличных', False)
         else:
-            new_money = int(card.get_balance()) - money
-            l = int(card.get_chosen()) - 1
-            from_card = open('newcard.txt')
-            to_card = open('card.txt', 'w')
+            if money > int(card.get_balance()) or money < 0:
+                single_t.log('Выдача наличных', False)
+            else:
+                self.set_storage(storage - money)
+                f_storage = open('bank.txt', 'w')
+                f_storage.write(str(self.get_storage()))
+                f_storage.close()
 
-            single_t.log('Выдача наличных', True)
-            k1 = from_card.readline()
-            to_card.write(k1)
-            for i in range(0, int(k1)):
-                if i == l:
-                    from_card.readline()
-                    from_card.readline()
-                    from_card.readline()
-                    from_card.readline()
-                    from_card.readline()
-                    from_card.readline()
+                new_money = int(card.get_balance()) - money
+                l = int(card.get_chosen()) - 1
+                from_card = open('newcard.txt')
+                to_card = open('card.txt', 'w')
 
-                    to_card.write(card.get_number())
-                    to_card.write(card.get_data())
-                    to_card.write(card.get_holder())
-                    to_card.write(str(card.get_pin()) + '\n')
-                    to_card.write(card.get_cvv())
-                    card.set_balance(new_money)
-                    to_card.write(str(card.get_balance()) + '\n')
-                else:
-                    to_card.write(from_card.readline())
-                    to_card.write(from_card.readline())
-                    to_card.write(from_card.readline())
-                    to_card.write(from_card.readline())
-                    to_card.write(from_card.readline())
-                    to_card.write(from_card.readline())
+                single_t.log('Выдача наличных', True)
+                k1 = from_card.readline()
+                to_card.write(k1)
+                for i in range(0, int(k1)):
+                    if i == l:
+                        from_card.readline()
+                        from_card.readline()
+                        from_card.readline()
+                        from_card.readline()
+                        from_card.readline()
+                        from_card.readline()
 
-            from_card.close()
-            to_card.close()
+                        to_card.write(card.get_number())
+                        to_card.write(card.get_data())
+                        to_card.write(card.get_holder())
+                        to_card.write(str(card.get_pin()) + '\n')
+                        to_card.write(card.get_cvv())
+                        card.set_balance(new_money)
+                        to_card.write(str(card.get_balance()) + '\n')
+                    else:
+                        to_card.write(from_card.readline())
+                        to_card.write(from_card.readline())
+                        to_card.write(from_card.readline())
+                        to_card.write(from_card.readline())
+                        to_card.write(from_card.readline())
+                        to_card.write(from_card.readline())
+
+                from_card.close()
+                to_card.close()
 
 
 class ChangePin:
@@ -108,22 +118,28 @@ class ChangePin:
             print('Попробуйте позже!')
 
 
-class GetMoney:
+class GetMoney(Bank):
     """пополнение денежных средств"""
-    @staticmethod
-    def money_in(card, single_t):
+    def money_in(self, card, single_t):
         money = int(input('Вставьте купюру: '))
         new_money = int(card.get_balance()) + money
-        l = int(card.get_chosen()) - 1
+        find = int(card.get_chosen()) - 1
         single_t.log('Пополнение счета', True)
+
+        # пополнение средств хранилища
+        storage = self.get_storage()
+        self.set_storage(storage + money)
+        file = open('bank.txt', 'w')
+        file.write(str(self.get_storage()))
+        file.close()
+
+        # изменение данных о средствах пользователя
         from_card = open('newcard.txt')
         to_card = open('card.txt', 'w')
-
         k = from_card.readline()
         to_card.write(k)
-
         for i in range(0, int(k)):
-            if i == l:
+            if i == find:
                 from_card.readline()
                 from_card.readline()
                 from_card.readline()

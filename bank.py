@@ -1,31 +1,8 @@
 class Bank:
-
-    def __init__(self, chosen: int):
-        find = chosen - 1
-        file = open('card.txt')
-        k = int(file.readline())
-
-        for i in range(0, k):
-            if i == find:
-                card_number = file.readline()
-                self.set_number(card_number)
-                data = file.readline()
-                self.set_data(data)
-                holder = file.readline()
-                self.set_holder(holder)
-                pin = int(file.readline())
-                self.set_pin(pin)
-                cvv = file.readline()
-                self.set_cvv(cvv)
-                balance = int(file.readline())
-                self.set_balance(balance)
-            else:
-                ard_number = file.readline()
-                data = file.readline()
-                holder = file.readline()
-                pin = int(file.readline())
-                cvv = file.readline()
-                balance = int(file.readline())
+    """хранилище денег"""
+    def __init__(self):
+        file = open('bank.txt')
+        self.storage = int(file.readline())
         file.close()
 
     # копирование данных о карточке
@@ -45,6 +22,12 @@ class Bank:
             new_card.write(str(card.readline()))
         card.close()
         new_card.close()
+
+    def get_storage(self) -> int:
+        return self.storage
+
+    def set_storage(self, storage: int):
+        self.storage = storage
 
     def get_number(self) -> str:
         return self.card_number
