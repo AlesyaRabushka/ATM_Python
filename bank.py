@@ -28,39 +28,5 @@ class Bank:
     def set_storage(self, storage: int):
         self.storage = storage
 
-    def get_number(self) -> str:
-        return self.card_number
 
-    def set_number(self, number: str):
-        self.card_number = number
-
-    def get_holder(self) -> str:
-        return self.card_holder
-
-    def set_holder(self, holder: str):
-        self.card_holder = holder
-
-    def get_data(self) -> str:
-        return self.card_data
-
-    def set_data(self, data: str):
-        self.card_data = data
-
-    def get_pin(self) -> int:
-        return self.card_pin
-
-    def set_pin(self, pin: int):
-        self.card_pin = pin
-
-    def get_cvv(self):
-        return self.card_cvv
-
-    def set_cvv(self, cvv):
-        self.card_cvv = cvv
-
-    def get_balance(self) -> int:
-        return self.card_balance
-
-    def set_balance(self, balance: int):
-        self.card_balance = balance
 

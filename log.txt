@@ -186,3 +186,23 @@ Status: Success
 Operation type: Вход в систему
 Status: Fail
 
+24-02-2022  21:46:45
+Operation type: Вход в систему
+Status: Success
+
+24-02-2022  21:46:46
+Operation type: Данные банковской карты
+Status: Success
+
+24-02-2022  21:46:55
+Operation type: Выдача наличных
+Status: Success
+
+24-02-2022  21:46:56
+Operation type: Данные банковской карты
+Status: Success
+
+24-02-2022  21:47:00
+Operation type: Выход из системы
+Status: Success
+
