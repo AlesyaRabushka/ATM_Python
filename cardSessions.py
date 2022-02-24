@@ -1,7 +1,8 @@
-# операции с карто
 import os
 from bank import Bank
 
+
+# здесь собраны все операции с участием карточки
 
 class GiveMoney(Bank):
     """выдача наличных"""
