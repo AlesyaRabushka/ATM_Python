@@ -1,5 +1,6 @@
 import os
 from bank import Bank
+from exception import MyException
 
 
 # здесь собраны все операции с участием карточки
@@ -62,7 +63,7 @@ class GiveMoney(Bank):
                 to_card.close()
 
 
-class ChangePin:
+class ChangePin(MyException):
     """смена пин-код"""
     @staticmethod
     def change_card_pin(card, pin: int, single_t):
@@ -76,8 +77,8 @@ class ChangePin:
 
                     # проверка, что пин-код содержит не более 4х символов
                     if len(str(new_pin)) > 4:
-                        single_t.log('Cмена пин-код', False)
-                        print('Неверный ввод пин-код. Попробуйте ещё раз!')
+                        raise MyException('Неверный ввод пин-код. Попробуйте ещё раз!')
+
                     else:
                         card.set_pin(new_pin)
                         single_t.log('Cмена пин-код', True)
@@ -120,8 +121,8 @@ class ChangePin:
                     else:
                         print('Попробуйте еще раз!')
                         single_t.log('Смена пин-код', False)
-            except:
-                print('Попробуйте еще раз!')
+            except MyException as ex:
+                print(ex)
                 single_t.log('Смена пин-код', False)
 
 
