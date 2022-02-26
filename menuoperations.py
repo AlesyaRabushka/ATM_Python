@@ -45,7 +45,7 @@ class MenuOperations(Bankomat):
                 if tel == 1 or tel == 2 or tel == 3:
                     money = int(input("Введите сумму платежа: "))
                     telephone = Telephone()
-                    telephone.telephone_pay(card, money, tel, single_t)
+                    telephone.telephone_pay(card, money, tel, storage, single_t)
                 else:
                     print('\tНеверный номер операции. Повторите попытку позже.\n')
                     single_t.log('Пополнение счета телефона', False)

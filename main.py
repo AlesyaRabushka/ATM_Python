@@ -18,7 +18,7 @@ if chosen.choose_card():
 
     # проверка пин-код
     # если успешно -> выводит список опций
-    if MainScreen.check_pin(chosen.get_chosen(), card):
+    if MainScreen.check_pin(chosen.get_chosen(), card, single_t):
         single_t.log('Вход в систему', True)
         MenuOperations.print_menu(card, single_t)
     else:

@@ -38,3 +38,20 @@ class Card(Bank, Chosen):
         print('\tДоступные средства: ', end=' ')
         print(self.get_balance(), end='\n')
 
+    # копирование данных о карточке
+    def copy_data(self):
+        card = open("card.txt", "r")
+        new_card = open("newcard.txt", "w")
+
+        k = int(card.readline())
+        new_card.write(str(k) + '\n')
+        for i in range(0, k):
+            new_card.write(str(card.readline()))
+            new_card.write(str(card.readline()))
+            new_card.write(str(card.readline()))
+            new_card.write(str(card.readline()))
+            new_card.write(str(card.readline()))
+            new_card.write(str(card.readline()))
+        card.close()
+        new_card.close()
+

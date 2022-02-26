@@ -1,6 +1,5 @@
-import os
 from exception import MyException
-
+from bank import Bank
 
 # здесь собраны все операции с участием карточки
 
@@ -11,7 +10,7 @@ class GiveMoney:
         storage = bankomat_storage.get_storage()
         # проверяем, достаточно ли средств в банкомате
         if money > storage:
-            print('\tЛимит средств привышен!\n')
+            print('\tЛимит средств превышен!\n')
             single_t.log('Выдача наличных', False)
         else:
             if money > int(card.get_balance()) or money < 0:
@@ -112,7 +111,6 @@ class ChangePin(MyException):
                                 to_card.write(from_card.readline())
                         from_card.close()
                         to_card.close()
-                        os.remove('newcard.txt')
                         break
                 else:
                     if i - 1 == 0:
@@ -140,6 +138,7 @@ class GetMoney:
         file.close()
 
         # изменение данных о средствах пользователя
+        card.copy_data()
         from_card = open('newcard.txt')
         to_card = open('card.txt', 'w')
         amount = from_card.readline()
@@ -264,8 +263,8 @@ class Currency:
 class Telephone(GiveMoney):
     """оплата телефона"""
 
-    def telephone_pay(self, card, money: int, tel_number: int, single_t):
-        self.money_out(card, money, single_t)
+    def telephone_pay(self, card, money: int, tel_number: int, bankomat_storage, single_t):
+        self.money_out(card, money, bankomat_storage, single_t)
         self.copy_data()
 
         from_card = open('newtelephone.txt', 'r')

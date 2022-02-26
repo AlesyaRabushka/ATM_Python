@@ -9,7 +9,7 @@ class MainScreen:
 
     # проверка пин-код
     @staticmethod
-    def check_pin(k, card):
+    def check_pin(k, card, single_t):
         old = int(card.get_pin())
         print(old)
         _next = 0
@@ -20,11 +20,14 @@ class MainScreen:
                 if old == new_pin:
                     flag = 1
                     _next = 1
+                    single_t.log('Ввод пин-код', True)
                     break
                 else:
                     print('\tНеверный пин-код. Осталось попыток: ' + str(i - 1))
+                    single_t.log('Ввод пин-код', False)
             except:
                 print('\tНеверный пин-код. Осталось попыток: ' + str(i - 1))
+                single_t.log('Ввод пин-код', False)
 
             if flag == 0:
                 _next = 0
