@@ -278,3 +278,27 @@ Status: Fail
 Operation type: Выход из системы
 Status: Success
 
+26-02-2022  17:44:40
+Operation type: Вход в систему
+Status: Success
+
+26-02-2022  17:44:42
+Operation type: Выход из системы
+Status: Success
+
+26-02-2022  17:55:43
+Operation type: Вход в систему
+Status: Success
+
+26-02-2022  17:55:45
+Operation type: Пополнение счета
+Status: Success
+
+26-02-2022  17:55:47
+Operation type: Данные банковской карты
+Status: Success
+
+26-02-2022  17:55:50
+Operation type: Выход из системы
+Status: Success
+

@@ -56,8 +56,9 @@ class MenuOperations(Bank):
 
             # пополнение средств
             elif k == 5:
+                money = int(input('Вставьте купюру: '))
                 get_money = GetMoney()
-                get_money.money_in(card, single_t)
+                get_money.money_in(card, money, single_t)
 
             # выход из проги
             elif k == 0:

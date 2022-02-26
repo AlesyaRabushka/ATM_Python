@@ -128,8 +128,7 @@ class ChangePin(MyException):
 
 class GetMoney(Bank):
     """пополнение денежных средств"""
-    def money_in(self, card, single_t):
-        money = int(input('Вставьте купюру: '))
+    def money_in(self, card, money: int, single_t):
         new_money = int(card.get_balance()) + money
         find = int(card.get_chosen()) - 1
         single_t.log('Пополнение счета', True)
