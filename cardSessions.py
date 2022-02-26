@@ -1,16 +1,15 @@
 import os
-from bank import Bank
 from exception import MyException
 
 
 # здесь собраны все операции с участием карточки
 
-class GiveMoney(Bank):
+class GiveMoney:
     """выдача наличных"""
-    def money_out(self, card, money: int, single_t):
+    def money_out(self, card, money: int, bankomat_storage, single_t):
         card.copy_data()
-        storage = self.get_storage()
-
+        storage = bankomat_storage.get_storage()
+        # проверяем, достаточно ли средств в банкомате
         if money > storage:
             print('\tЛимит средств привышен!\n')
             single_t.log('Выдача наличных', False)
@@ -20,9 +19,9 @@ class GiveMoney(Bank):
                 single_t.log('Выдача наличных', False)
             else:
                 # изменяем количество средств хранилища
-                self.set_storage(storage - money)
-                f_storage = open('bank.txt', 'w')
-                f_storage.write(str(self.get_storage()))
+                bankomat_storage.set_storage(storage - money)
+                f_storage = open('bankomat.txt', 'w')
+                f_storage.write(str(bankomat_storage.get_storage()))
                 f_storage.close()
 
                 # поиск и изменение средств карточки
@@ -126,18 +125,18 @@ class ChangePin(MyException):
                 single_t.log('Смена пин-код', False)
 
 
-class GetMoney(Bank):
+class GetMoney:
     """пополнение денежных средств"""
-    def money_in(self, card, money: int, single_t):
+    def money_in(self, card, money: int, bankomat_storage, single_t):
         new_money = int(card.get_balance()) + money
         find = int(card.get_chosen()) - 1
         single_t.log('Пополнение счета', True)
 
         # пополнение средств хранилища
-        storage = self.get_storage()
-        self.set_storage(storage + money)
-        file = open('bank.txt', 'w')
-        file.write(str(self.get_storage()))
+        storage = bankomat_storage.get_storage()
+        bankomat_storage.set_storage(storage + money)
+        file = open('bankomat.txt', 'w')
+        file.write(str(bankomat_storage.get_storage()))
         file.close()
 
         # изменение данных о средствах пользователя

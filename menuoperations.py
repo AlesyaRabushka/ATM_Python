@@ -2,18 +2,18 @@ from cardSessions import GiveMoney
 from cardSessions import ChangePin
 from cardSessions import GetMoney
 from cardSessions import Telephone
-from bank import Bank
+from bankomat import Bankomat
 
 
-class MenuOperations(Bank):
+class MenuOperations(Bankomat):
     """меню опций"""
 
     @staticmethod
     def print_menu(card, single_t):
         # приезжают инкассаторы и кладут денежку в банкомат
-        storage = Bank()
+        storage = Bankomat()
         storage.set_storage(10000)
-        file = open('bank.txt', 'w')
+        file = open('bankomat.txt', 'w')
         file.write(str(storage.get_storage()))
         file.close()
 
@@ -36,7 +36,7 @@ class MenuOperations(Bank):
             elif k == 2:
                 money = int(input("Введите сумму выдачи: "))
                 give_money = GiveMoney()
-                give_money.money_out(card, money, single_t)
+                give_money.money_out(card, money, storage, single_t)
 
             # оплата телефона
             elif k == 3:
@@ -58,7 +58,7 @@ class MenuOperations(Bank):
             elif k == 5:
                 money = int(input('Вставьте купюру: '))
                 get_money = GetMoney()
-                get_money.money_in(card, money, single_t)
+                get_money.money_in(card, money, storage, single_t)
 
             # выход из проги
             elif k == 0:
