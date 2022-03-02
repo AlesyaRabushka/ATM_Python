@@ -75,7 +75,7 @@ class ChangePin(MyException):
                         new_pin = int(input('Введите новый пин-код: '))
 
                         # проверка, что пин-код содержит не более 4х символов
-                        if len(str(new_pin)) > 4:
+                        if len(str(new_pin)) != 4:
                             raise MyException('Неверный ввод пин-код. Попробуйте ещё раз!')
 
                         else:
