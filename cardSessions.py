@@ -25,9 +25,11 @@ class GiveMoney:
 
                 # поиск и изменение средств карточки
                 new_money = int(card.get_balance()) - money
-                user = int(card.get_chosen()) - 1
+                user = int(card.get_chosen()) - 1#выбор номера карточки
+
                 from_card = open('newcard.txt')
                 to_card = open('card.txt', 'w')
+
                 single_t.log('Выдача наличных', True)
                 amount = from_card.readline()
                 to_card.write(amount)

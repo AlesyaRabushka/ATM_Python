@@ -6,7 +6,7 @@ class Card(Bank, Chosen):
     """карточка"""
     def __init__(self, chosen):
         self.chosen = chosen
-        super().__init__(chosen)
+        super().__init__(chosen)#метод супер класса(считываем)
 
     # скрытие номера карточки, кроме последних 4х цифр
     @staticmethod
@@ -43,9 +43,9 @@ class Card(Bank, Chosen):
         card = open("card.txt", "r")
         new_card = open("newcard.txt", "w")
 
-        k = int(card.readline())
-        new_card.write(str(k) + '\n')
-        for i in range(0, k):
+        amount = int(card.readline())
+        new_card.write(str(amount) + '\n')
+        for i in range(0, amount):
             new_card.write(str(card.readline()))
             new_card.write(str(card.readline()))
             new_card.write(str(card.readline()))
