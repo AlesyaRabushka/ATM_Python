@@ -30,7 +30,7 @@ class MenuOperations(Bankomat):
             # данные о карточке
             if k == 1:
                 card.print_card_info()
-                single_t.log('Данные банковской карты', True)
+                single_t.log('Данные банковской карты', True,'')
 
             # выдача наличных
             elif k == 2:
@@ -48,7 +48,7 @@ class MenuOperations(Bankomat):
                     telephone.telephone_pay(card, money, tel, storage, single_t)
                 else:
                     print('\tНеверный номер операции. Повторите попытку позже.\n')
-                    single_t.log('Пополнение счета телефона', False)
+                    single_t.log('Пополнение счета телефона', False,' Неверный номер операции')
 
             # смена пин-код
             elif k == 4:
@@ -62,7 +62,7 @@ class MenuOperations(Bankomat):
 
             # выход из проги
             elif k == 0:
-                single_t.log('Выход из системы', True)
+                single_t.log('Выход из системы', True,'')
                 exit()
             else:
                 print('Неверный номер операции')

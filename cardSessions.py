@@ -11,11 +11,11 @@ class GiveMoney:
         # проверяем, достаточно ли средств в банкомате
         if money > storage:
             print('\tЛимит средств превышен!\n')
-            single_t.log('Выдача наличных', False)
+            single_t.log('Выдача наличных', False, ' Лимит средств превышен')
         else:
             if money > int(card.get_balance()) or money < 0:
                 print('\tНедостаточно средств\n')
-                single_t.log('Выдача наличных', False)
+                single_t.log('Выдача наличных', False, ' Недостаточно средств')
             else:
                 # изменяем количество средств хранилища
                 bankomat_storage.set_storage(storage - money)
@@ -30,7 +30,7 @@ class GiveMoney:
                 from_card = open('newcard.txt')
                 to_card = open('card.txt', 'w')
 
-                single_t.log('Выдача наличных', True)
+                single_t.log('Выдача наличных', True,'')
                 amount = from_card.readline()
                 to_card.write(amount)
 
@@ -82,7 +82,7 @@ class ChangePin(MyException):
 
                         else:
                             card.set_pin(new_pin)
-                            single_t.log('Cмена пин-код', True)
+                            single_t.log('Cмена пин-код', True,'')
 
                             # изменение средств на самой карточке
                             from_card = open('newcard.txt')
@@ -117,17 +117,17 @@ class ChangePin(MyException):
                             break
                     except:
                         print('Неверный формат ввода. Осталось попыток: ' + str(i-1))
-                        single_t.log('Смена пин-код', False)
+                        single_t.log('Смена пин-код', False, ' Неверный формат ввода')
                 else:
                     if i - 1 == 0:
                         print('Неверный пин-код. Попробуйте позже!')
                         break
                     else:
                         print('Попробуйте еще раз! Осталось попыток: ' + str(i-1))
-                        single_t.log('Смена пин-код', False)
+                        single_t.log('Смена пин-код', False,' Неверный пин-код')
             except:
                 print('Неверный пин-код. Попробуйте ещё раз! Осталось попыток: ' + str(i-1))
-                single_t.log('Смена пин-код', False)
+                single_t.log('Смена пин-код', False, ' Неверный пин-код')
 
 
 class GetMoney:
@@ -135,7 +135,7 @@ class GetMoney:
     def money_in(self, card, money: int, bankomat_storage, single_t):
         new_money = int(card.get_balance()) + money
         find = int(card.get_chosen()) - 1
-        single_t.log('Пополнение счета', True)
+        single_t.log('Пополнение счета', True,'')
 
         # пополнение средств хранилища
         storage = bankomat_storage.get_storage()
@@ -278,7 +278,7 @@ class Telephone(GiveMoney):
         to_card = open('telephone.txt', 'w')
         k = from_card.readline()
         to_card.write(k)
-        single_t.log('Пополнение счета телефона', True)
+        single_t.log('Пополнение счета телефона', True,'')
 
         for i in range(0, int(k)):
             if i == tel_number - 1:

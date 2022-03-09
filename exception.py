@@ -1,4 +1,5 @@
-class MyException(Exception):
+from singleton import Singleton
+class MyException(Singleton):
     """класс для генерации исключений"""
     def __init__(self, error):
         self.error_type = error

@@ -20,14 +20,14 @@ class MainScreen:
                 if old == new_pin:
                     flag = 1
                     _next = 1
-                    single_t.log('Ввод пин-код', True)
+                    single_t.log('Ввод пин-код', True,'')
                     break
                 else:
                     print('\tНеверный пин-код. Осталось попыток: ' + str(i - 1))
-                    single_t.log('Ввод пин-код', False)
+                    single_t.log('Ввод пин-код', False,' Неверный пин-код')
             except:
                 print('\tНеверный пин-код. Осталось попыток: ' + str(i - 1))
-                single_t.log('Ввод пин-код', False)
+                single_t.log('Ввод пин-код', False,' Неверный пин-код')
 
             if flag == 0:
                 _next = 0
