@@ -24,10 +24,10 @@ class MainScreen:
                     break
                 else:
                     print('\tНеверный пин-код. Осталось попыток: ' + str(i - 1))
-                    single_t.log('Ввод пин-код', False,' Неверный пин-код')
+                    single_t.log('Ввод пин-код', False, 'Неверный пин-код')
             except:
                 print('\tНеверный пин-код. Осталось попыток: ' + str(i - 1))
-                single_t.log('Ввод пин-код', False,' Неверный пин-код')
+                single_t.log('Ввод пин-код', False, 'Неверный пин-код')
 
             if flag == 0:
                 _next = 0
