@@ -25,8 +25,10 @@ class MenuOperations(Bankomat):
             print("\t4 - Смена пин-кода")
             print("\t5 - Добавить средства на карточку")
             print("\t0 - Забрать карту и закончить работу")
-            k = int(input())
-
+            try:
+                k = int(input())
+            except ValueError:
+                print("\tНеверный код операции\n")
             # данные о карточке
             if k == 1:
                 card.print_card_info()
