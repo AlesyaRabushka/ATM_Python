@@ -1,9 +1,25 @@
 from exception import MyException
 
-
 # здесь собраны все операции с участием карточки
 
-class GiveMoney:
+class CardCheck:
+    """Чек"""
+    def chek(self):
+        print("Хотите ли вы забрать чек?")
+        print("1 - Да")
+        print("2 - Нет")
+        try:
+            t = int(input())
+            if t == 1:
+                print("Заберите Ваш чек")
+            elif t == 2:
+                pass
+            else:
+                print("\tНеверный код операции\n")
+        except ValueError:
+            print("\tНеверный код операции")
+
+class GiveMoney(CardCheck):
     """выдача наличных"""
     def money_out(self, card, money: int, bankomat_storage, single_t):
         card.copy_data()
@@ -61,6 +77,9 @@ class GiveMoney:
 
                 from_card.close()
                 to_card.close()
+        c = CardCheck()
+        c.chek()
+
 
 
 class ChangePin(MyException):
@@ -292,6 +311,11 @@ class Telephone(GiveMoney):
                 to_card.write(from_card.readline())
         from_card.close()
         to_card.close()
+
+
+
+
+
 
     @staticmethod
     def copy_data():
