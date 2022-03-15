@@ -12,150 +12,159 @@ class CardCheck:
         try:
             t = int(input())
             if t == 1:
-                print("Заберите Ваш чек")
+                print("\tЗаберите Ваш чек")
             elif t == 2:
                 pass
             else:
-                print("\tНеверный код операции\n")
+                print("\t----------Неверный код операции----------\n")
         except ValueError:
-            print("\tНеверный код операции")
+            print("\t----------Неверный код операции----------")
 
 #выдача деняк
 class GiveMoney:
     """выдача наличных"""
     def money_out(self, card, money: int, bankomat_storage, single_t, currency):
         card.copy_data()
-        # ветка BYN
-        if currency == 'BYN':
-            storage = bankomat_storage.get_storage_byn()
 
-            # проверяем, достаточно ли средств в банкомате
-            if money > storage:
-                print('\tЛимит средств превышен!\n')
-                single_t.log('Выдача наличных', False, ' Лимит средств превышен')
-            else:
-                if money > int(card.get_balance_byn()):
-                    print('\tНедостаточно средств\n')
-                    single_t.log('Выдача наличных', False, ' Недостаточно средств')
-                elif money < 0:
-                    print('\tНеверный формат ввода\n')
-                    single_t.log('Выдача наличных', False, ' Неверный формат ввода')
+        try:
+            # ветка BYN
+            if currency == 'BYN':
+                storage = bankomat_storage.get_storage_byn()
+
+                # проверяем, достаточно ли средств в банкомате
+                if money > storage:
+                    print('\t----------Лимит средств превышен!----------\n')
+                    single_t.log('Выдача наличных', False, ' Лимит средств превышен')
                 else:
-                    # изменяем количество средств хранилища
-                    bankomat_storage.set_storage_byn(storage - money)
-                    f_storage = open('bankomat.txt', 'w')
-                    f_storage.write(str(bankomat_storage.get_storage_byn()))
-                    f_storage.write(str(bankomat_storage.get_storage_usd()))
-                    f_storage.close()
+                    if money > int(card.get_balance_byn()):
+                        print('\t----------Недостаточно средств----------\n')
+                        single_t.log('Выдача наличных', False, ' Недостаточно средств')
+                    elif money < 0:
+                        print('\t----------Неверный формат ввода----------\n')
+                        single_t.log('Выдача наличных', False, ' Неверный формат ввода')
+                    else:
+                        # изменяем количество средств хранилища
+                        bankomat_storage.set_storage_byn(storage - money)
+                        f_storage = open('bankomat.txt', 'w')
+                        f_storage.write(str(bankomat_storage.get_storage_byn()))
+                        f_storage.write(str(bankomat_storage.get_storage_usd()))
+                        f_storage.close()
 
-                    # поиск и изменение средств карточки
-                    new_money = float(card.get_balance_byn()) - money
-                    user = int(card.get_chosen()) - 1#выбор номера карточки
+                        # поиск и изменение средств карточки
+                        new_money = float(card.get_balance_byn()) - money
+                        user = int(card.get_chosen()) - 1#выбор номера карточки
 
-                    from_card = open('newcard.txt')
-                    to_card = open('card.txt', 'w')
+                        from_card = open('newcard.txt')
+                        to_card = open('card.txt', 'w')
 
-                    single_t.log('Выдача наличных', True,'')
-                    amount = from_card.readline()
-                    to_card.write(amount)
+                        single_t.log('Выдача наличных', True,'')
+                        amount = from_card.readline()
+                        to_card.write(amount)
 
-                    # поиск нужной нам карточки (записи)
-                    for i in range(0, int(amount)):
-                        if i == user:
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
+                        # поиск нужной нам карточки (записи)
+                        for i in range(0, int(amount)):
+                            if i == user:
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
 
-                            to_card.write(card.get_number())
-                            to_card.write(card.get_data())
-                            to_card.write(card.get_holder())
-                            to_card.write(str(card.get_pin()) + '\n')
-                            to_card.write(card.get_cvv())
-                            card.set_balance_byn(new_money)
-                            to_card.write(str(card.get_balance_byn()) + '\n')
-                            to_card.write(str(card.get_balance_usd()) + '\n')
-                        else:
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
+                                to_card.write(card.get_number())
+                                to_card.write(card.get_data())
+                                to_card.write(card.get_holder())
+                                to_card.write(str(card.get_pin()) + '\n')
+                                to_card.write(card.get_cvv())
+                                card.set_balance_byn(new_money)
+                                to_card.write(str(card.get_balance_byn()) + '\n')
+                                to_card.write(str(card.get_balance_usd()) + '\n')
+                            else:
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
 
-                    from_card.close()
-                    to_card.close()
+                        from_card.close()
+                        to_card.close()
+                        # выдача чека
+                        c = CardCheck()
+                        c.chek()
 
-        # ветка USD
-        else:
-            storage = bankomat_storage.get_storage_usd()
-
-            # проверяем, достаточно ли средств в банкомате
-            if money > storage:
-                print('\tЛимит средств превышен!\n')
-                single_t.log('Выдача наличных', False, ' Лимит средств превышен')
+            # ветка USD
             else:
-                if money > int(card.get_balance_usd()):
-                    print('\tНедостаточно средств\n')
-                    single_t.log('Выдача наличных', False, ' Недостаточно средств')
-                elif money < 0:
-                    print('\tНеверный формат ввода\n')
-                    single_t.log('Выдача наличных', False, ' Неверный формат ввода')
+                storage = bankomat_storage.get_storage_usd()
+
+                # проверяем, достаточно ли средств в банкомате
+                if money > storage:
+                    print('\t----------Лимит средств превышен!----------\n')
+                    single_t.log('Выдача наличных', False, ' Лимит средств превышен')
                 else:
-                    # изменяем количество средств хранилища
-                    bankomat_storage.set_storage_usd(storage - money)
-                    f_storage = open('bankomat.txt', 'w')
-                    f_storage.write(str(bankomat_storage.get_storage_byn())+'\n')
-                    f_storage.write(str(bankomat_storage.get_storage_usd()) + '\n')
-                    f_storage.close()
+                    if money > int(card.get_balance_usd()):
+                        print('\t----------Недостаточно средств----------\n')
+                        single_t.log('Выдача наличных', False, ' Недостаточно средств')
+                    elif money < 0:
+                        print('\t----------Неверный формат ввода----------\n')
+                        single_t.log('Выдача наличных', False, ' Неверный формат ввода')
+                    else:
+                        # изменяем количество средств хранилища
+                        bankomat_storage.set_storage_usd(storage - money)
+                        f_storage = open('bankomat.txt', 'w')
+                        f_storage.write(str(bankomat_storage.get_storage_byn())+'\n')
+                        f_storage.write(str(bankomat_storage.get_storage_usd()) + '\n')
+                        f_storage.close()
 
-                    # поиск и изменение средств карточки
-                    new_money = float(card.get_balance_usd()) - money
-                    user = int(card.get_chosen()) - 1  # выбор номера карточки
+                        # поиск и изменение средств карточки
+                        new_money = float(card.get_balance_usd()) - money
+                        user = int(card.get_chosen()) - 1  # выбор номера карточки
 
-                    from_card = open('newcard.txt')
-                    to_card = open('card.txt', 'w')
+                        from_card = open('newcard.txt')
+                        to_card = open('card.txt', 'w')
 
-                    single_t.log('Выдача наличных', True, '')
-                    amount = from_card.readline()
-                    to_card.write(amount)
+                        single_t.log('Выдача наличных', True, '')
+                        amount = from_card.readline()
+                        to_card.write(amount)
 
-                    # поиск нужной нам карточки (записи)
-                    for i in range(0, int(amount)):
-                        if i == user:
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
-                            from_card.readline()
+                        # поиск нужной нам карточки (записи)
+                        for i in range(0, int(amount)):
+                            if i == user:
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
+                                from_card.readline()
 
-                            to_card.write(card.get_number())
-                            to_card.write(card.get_data())
-                            to_card.write(card.get_holder())
-                            to_card.write(str(card.get_pin()) + '\n')
-                            to_card.write(card.get_cvv())
-                            card.set_balance_usd(new_money)
-                            to_card.write(str(card.get_balance_byn()) + '\n')
-                            to_card.write(str(card.get_balance_usd()) + '\n')
-                        else:
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
-                            to_card.write(from_card.readline())
+                                to_card.write(card.get_number())
+                                to_card.write(card.get_data())
+                                to_card.write(card.get_holder())
+                                to_card.write(str(card.get_pin()) + '\n')
+                                to_card.write(card.get_cvv())
+                                card.set_balance_usd(new_money)
+                                to_card.write(str(card.get_balance_byn()) + '\n')
+                                to_card.write(str(card.get_balance_usd()) + '\n')
+                            else:
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
+                                to_card.write(from_card.readline())
 
-                    from_card.close()
-                    to_card.close()
+                        from_card.close()
+                        to_card.close()
+                        # выдача чека
+                        c = CardCheck()
+                        c.chek()
+        except ValueError:
+            print('\t----------Неверный код операции----------')
 
-        c = CardCheck()
-        c.chek()
+
 
 
 class ChangePin(MyException):
@@ -224,6 +233,7 @@ class ChangePin(MyException):
                 print('Неверный пин-код. Попробуйте ещё раз! Осталось попыток: ' + str(i-1))
                 single_t.log('Смена пин-код', False, ' Неверный пин-код')
 
+#деньги на бочку!
 class GetMoney:
     """пополнение денежных средств"""
     def money_in(self, card, money: int, bankomat_storage, single_t):

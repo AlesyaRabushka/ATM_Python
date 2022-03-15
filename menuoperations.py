@@ -33,7 +33,7 @@ class MenuOperations(Bankomat):
             try:
                 k = int(input())
             except ValueError:
-                print("\tНеверный код операции\n")
+                print("\t----------Неверный код операции----------\n")
 
             # данные о карточке
             if k == 1:
@@ -78,9 +78,9 @@ class MenuOperations(Bankomat):
                                 give_money = GiveMoney()
                                 give_money.money_out(card, 100, storage, single_t, 'BYN')
                             else:
-                                print("\tНеверный код операции\n")
+                                print("\t----------Неверный код операции----------\n")
                         except ValueError:
-                            print("\tНеверный код операции")
+                            print("\t----------Неверный код операции----------")
                     elif s == 2:
                         print("\tВыберите нужную сумму:")
                         print("\t1 - 5$")
@@ -111,12 +111,12 @@ class MenuOperations(Bankomat):
                                 give_money = GiveMoney()
                                 give_money.money_out(card, 100, storage, single_t, 'USD')
                             else:
-                                print("\tНеверный код операции\n")
+                                print("\t----------Неверный код операции----------\n")
                         except ValueError:
-                            print("\tНеверный код операции")
+                            print("\t----------Неверный код операции----------")
 
                 except ValueError:
-                    print("\tНеверный код операции")
+                    print("\t----------Неверный код операции----------")
 
             # оплата телефона
             elif k == 3:
@@ -127,7 +127,7 @@ class MenuOperations(Bankomat):
                     telephone = Telephone()
                     telephone.telephone_pay(card, money, tel, storage, single_t)
                 else:
-                    print('\tНеверный номер операции. Повторите попытку позже.\n')
+                    print('\t----------Неверный код операции. Повторите попытку позже.----------\n')
                     single_t.log('Пополнение счета телефона', False, 'Неверный номер операции')
 
             # смена пин-код
@@ -150,4 +150,4 @@ class MenuOperations(Bankomat):
                 single_t.log('Выход из системы', True,'')
                 exit()
             else:
-                print('Неверный номер операции')
+                print('----------Неверный код операции----------')

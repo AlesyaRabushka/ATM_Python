@@ -246,3 +246,102 @@ Status: Success
 Operation type: Выход из системы
 Status: Success
 
+15-03-2022  18:56:43
+Operation type: Ввод пин-код
+Status: Success
+
+15-03-2022  18:56:43
+Operation type: Вход в систему
+Status: Success
+
+15-03-2022  18:56:49
+Operation type: Данные банковской карты
+Status: Success
+
+15-03-2022  18:59:32
+Operation type: Ввод пин-код
+Status: Success
+
+15-03-2022  18:59:32
+Operation type: Вход в систему
+Status: Success
+
+15-03-2022  18:59:43
+Operation type: Данные банковской карты
+Status: Success
+
+15-03-2022  19:00:00
+Operation type: Выход из системы
+Status: Success
+
+15-03-2022  19:07:04
+Operation type: Ввод пин-код
+Status: Fail
+Error type: Неверный пин-код
+
+15-03-2022  19:07:08
+Operation type: Ввод пин-код
+Status: Success
+
+15-03-2022  19:07:08
+Operation type: Вход в систему
+Status: Success
+
+15-03-2022  19:07:18
+Operation type: Данные банковской карты
+Status: Success
+
+15-03-2022  19:09:23
+Operation type: Ввод пин-код
+Status: Success
+
+15-03-2022  19:09:23
+Operation type: Вход в систему
+Status: Success
+
+15-03-2022  19:09:30
+Operation type: Выдача наличных
+Status: Fail
+Error type:  Неверный формат ввода
+
+15-03-2022  19:09:34
+Operation type: Выход из системы
+Status: Success
+
+15-03-2022  19:10:28
+Operation type: Ввод пин-код
+Status: Success
+
+15-03-2022  19:10:28
+Operation type: Вход в систему
+Status: Success
+
+15-03-2022  19:10:29
+Operation type: Данные банковской карты
+Status: Success
+
+15-03-2022  19:10:39
+Operation type: Выдача наличных
+Status: Fail
+Error type:  Неверный формат ввода
+
+15-03-2022  19:10:43
+Operation type: Данные банковской карты
+Status: Success
+
+15-03-2022  19:10:46
+Operation type: Выход из системы
+Status: Success
+
+15-03-2022  19:13:57
+Operation type: Ввод пин-код
+Status: Success
+
+15-03-2022  19:13:57
+Operation type: Вход в систему
+Status: Success
+
+15-03-2022  19:14:11
+Operation type: Выход из системы
+Status: Success
+

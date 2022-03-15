@@ -15,16 +15,19 @@ class Chosen:
         print('\t1 - ALESIA RABUSHKA')
         print('\t2 - ALEKSEY SMELOV')
         print('\t3 - ALENA SKLEMA')
-        n = int(input())
-        if n == 1:
-            self.set_chosen(1)
-            return True
-        elif n == 2:
-            self.set_chosen(2)
-            return True
-        elif n == 3:
-            self.set_chosen(3)
-            return True
-        else:
-            print('Неверный код операции')
-            return False
+        try:
+            n = int(input())
+            if n == 1:
+                self.set_chosen(1)
+                return True
+            elif n == 2:
+                self.set_chosen(2)
+                return True
+            elif n == 3:
+                self.set_chosen(3)
+                return True
+            else:
+                print('\t----------Неверный код операции----------')
+                return False
+        except ValueError:
+            print('\t----------Неверный формат ввода----------')
