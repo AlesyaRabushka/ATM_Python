@@ -6,7 +6,7 @@ class pinValueException(Exception):
     def __str__(self):
         return f'{self.error_pin} пин-код должен содержать только цифры'
 
-class pinLengthException(Exception):
+class MyException(Exception):
     def __init__(self, pin):
         self.error = pin
         # возвращает строку с названием ошибки

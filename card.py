@@ -35,8 +35,10 @@ class Card(Bank, Chosen):
         print(self.get_holder(), end='')
         print('\tСрок эксплуатации: ', end=' ')
         print(self.get_data(), end='')
-        print('\tДоступные средства: ', end=' ')
-        print(self.get_balance(), end='\n')
+        print('\tДоступные средства (BYN): ', end=' ')
+        print(self.get_balance_byn(), end='\n')
+        print('\tДоступные средства (USD): ', end=' ')
+        print(self.get_balance_usd(), end='\n')
 
     # копирование данных о карточке
     def copy_data(self):
@@ -46,6 +48,7 @@ class Card(Bank, Chosen):
         amount = int(card.readline())
         new_card.write(str(amount) + '\n')
         for i in range(0, amount):
+            new_card.write(str(card.readline()))
             new_card.write(str(card.readline()))
             new_card.write(str(card.readline()))
             new_card.write(str(card.readline()))

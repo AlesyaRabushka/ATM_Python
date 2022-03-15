@@ -13,7 +13,9 @@ class Bank:
                 self.__card_holder = file.readline()
                 self.__card_pin = int(file.readline())
                 self.__card_cvv = file.readline()
-                self.__card_balance = int(file.readline())
+                self.__card_balance_byn = float(file.readline())
+                self.__card_balance_usd = float(file.readline())
+
             else:
                 # если невыбранная карточка, просто считываем, но нигде не сохраняем эти данные
                 card_number = file.readline()
@@ -21,7 +23,8 @@ class Bank:
                 holder = file.readline()
                 pin = int(file.readline())
                 cvv = file.readline()
-                balance = int(file.readline())
+                balance_by = float(file.readline())
+                balance_us = float(file.readline())
         file.close()
 
 
@@ -55,9 +58,15 @@ class Bank:
     def set_cvv(self, cvv):
         self.__card_cvv = cvv
 
-    def get_balance(self) -> int:
-        return self.__card_balance
+    def get_balance_byn(self) -> int:
+        return self.__card_balance_byn
 
-    def set_balance(self, balance: int):
-        self.__card_balance = balance
+    def set_balance_byn(self, balance: int):
+        self.__card_balance_byn = balance
+
+    def get_balance_usd(self) -> int:
+        return self.__card_balance_usd
+
+    def set_balance_usd(self, balance: int):
+        self.__card_balance_usd = balance
 

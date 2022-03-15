@@ -1,7 +1,24 @@
-from exception import pinLengthException
+from exception import MyException
 
 
 # здесь собраны все операции с участием карточки
+# выдача чека
+class CardCheck:
+    """Чек"""
+    def chek(self):
+        print("Хотите ли вы забрать чек?")
+        print("1 - Да")
+        print("2 - Нет")
+        try:
+            t = int(input())
+            if t == 1:
+                print("Заберите Ваш чек")
+            elif t == 2:
+                pass
+            else:
+                print("\tНеверный код операции\n")
+        except ValueError:
+            print("\tНеверный код операции")
 
 class GiveMoney:
     """выдача наличных"""
@@ -62,59 +79,65 @@ class GiveMoney:
                 from_card.close()
                 to_card.close()
 
+        c = CardCheck()
+        c.chek()
 
-class ChangePin():
+
+class ChangePin(MyException):
     """смена пин-код"""
     @staticmethod
     def change_card_pin(card, pin: int, single_t):
         for i in range(3, 0, -1):
+            try:
                 old_pin = int(input('Введите старый пин-код: '))
+
                 if pin == old_pin:
                     card.copy_data()
                     try:
                         new_pin = int(input('Введите новый пин-код: '))
-                    except ValueError:
-                        print('пин-код должен содержать только цифры')
-                        single_t.log('Смена пин-код', False, ' Неверный формат ввода')
-                        break
-                    # проверка, что пин-код содержит не более 4х символов
-                    if len(str(new_pin)) != 4:
-                        raise pinLengthException(new_pin)
-                        single_t.log('Смена пин-код', False, ' Неверный формат ввода')
-                    else:
-                        card.set_pin(new_pin)
-                        single_t.log('Cмена пин-код', True,'')
-                        # изменение средств на самой карточке
-                        from_card = open('newcard.txt')
-                        to_card = open('card.txt', 'w')
-                        user = int(card.get_chosen()) - 1
-                        amount = from_card.readline()
-                        to_card.write(str(amount))
-                        for j in range(0, int(amount)):
-                            if j == user:
-                                from_card.readline()
-                                from_card.readline()
-                                from_card.readline()
-                                from_card.readline()
-                                from_card.readline()
-                                from_card.readline()
 
-                                to_card.write(card.get_number())
-                                to_card.write(card.get_data())
-                                to_card.write(card.get_holder())
-                                to_card.write(str(card.get_pin()) + '\n')
-                                to_card.write(card.get_cvv())
-                                to_card.write(str(card.get_balance()) + '\n')
-                            else:
-                                to_card.write(from_card.readline())
-                                to_card.write(from_card.readline())
-                                to_card.write(from_card.readline())
-                                to_card.write(from_card.readline())
-                                to_card.write(from_card.readline())
-                                to_card.write(from_card.readline())
-                        from_card.close()
-                        to_card.close()
-                        break
+                        # проверка, что пин-код содержит не более 4х символов
+                        if len(str(new_pin)) != 4:
+                            raise MyException('Неверный ввод пин-код. Попробуйте ещё раз!')
+
+                        else:
+                            card.set_pin(new_pin)
+                            single_t.log('Cмена пин-код', True,'')
+
+                            # изменение средств на самой карточке
+                            from_card = open('newcard.txt')
+                            to_card = open('card.txt', 'w')
+                            user = int(card.get_chosen()) - 1
+                            amount = from_card.readline()
+                            to_card.write(str(amount))
+                            for j in range(0, int(amount)):
+                                if j == user:
+                                    from_card.readline()
+                                    from_card.readline()
+                                    from_card.readline()
+                                    from_card.readline()
+                                    from_card.readline()
+                                    from_card.readline()
+
+                                    to_card.write(card.get_number())
+                                    to_card.write(card.get_data())
+                                    to_card.write(card.get_holder())
+                                    to_card.write(str(card.get_pin()) + '\n')
+                                    to_card.write(card.get_cvv())
+                                    to_card.write(str(card.get_balance()) + '\n')
+                                else:
+                                    to_card.write(from_card.readline())
+                                    to_card.write(from_card.readline())
+                                    to_card.write(from_card.readline())
+                                    to_card.write(from_card.readline())
+                                    to_card.write(from_card.readline())
+                                    to_card.write(from_card.readline())
+                            from_card.close()
+                            to_card.close()
+                            break
+                    except:
+                        print('Неверный формат ввода. Осталось попыток: ' + str(i-1))
+                        single_t.log('Смена пин-код', False, ' Неверный формат ввода')
                 else:
                     if i - 1 == 0:
                         print('Неверный пин-код. Попробуйте позже!')
@@ -122,8 +145,9 @@ class ChangePin():
                     else:
                         print('Попробуйте еще раз! Осталось попыток: ' + str(i-1))
                         single_t.log('Смена пин-код', False,' Неверный пин-код')
-
-
+            except:
+                print('Неверный пин-код. Попробуйте ещё раз! Осталось попыток: ' + str(i-1))
+                single_t.log('Смена пин-код', False, ' Неверный пин-код')
 
 class GetMoney:
     """пополнение денежных средств"""
@@ -248,7 +272,7 @@ class Currency:
                     to_card.write(card.get_number())
                     to_card.write(card.get_data())
                     to_card.write(card.get_holder())
-                    to_card.write(card.get_pin())
+                    to_card.write(str(card.get_pin()) + '\n')
                     to_card.write(card.get_cvv())
                     to_card.write(str(card.get_balance()) + '\n')
                 else:
