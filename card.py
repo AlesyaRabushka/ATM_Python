@@ -38,7 +38,7 @@ class Card(Bank, Chosen):
         print('\tДоступные средства (BYN): ', end=' ')
         print(self.get_balance_byn(), end='\n')
         print('\tДоступные средства (USD): ', end=' ')
-        print(self.get_balance_usd(), end='\n')
+        print(self.get_balance_usd(), end='\n\n')
 
     # копирование данных о карточке
     def copy_data(self):

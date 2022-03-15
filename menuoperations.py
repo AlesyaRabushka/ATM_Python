@@ -17,7 +17,8 @@ class MenuOperations(Bankomat):
         storage.set_storage_usd(1000)
 
         file = open('bankomat.txt', 'w')
-        file.write(str(storage.get_storage()))
+        file.write(str(storage.get_storage_byn()))
+        file.write(str(storage.get_storage_usd()))
         file.close()
 
         while 1 == 1:
@@ -60,22 +61,22 @@ class MenuOperations(Bankomat):
                             if m == 6:
                                  money = int(input("Введите сумму выдачи: "))
                                  give_money = GiveMoney()
-                                 give_money.money_out(card, money, storage, single_t)
+                                 give_money.money_out(card, money, storage, single_t, 'BYN')
                             elif m == 1:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 5, storage, single_t)
+                                give_money.money_out(card, 5, storage, single_t, 'BYN')
                             elif m == 2:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 10, storage, single_t)
+                                give_money.money_out(card, 10, storage, single_t, 'BYN')
                             elif m == 3:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 20, storage, single_t)
+                                give_money.money_out(card, 20, storage, single_t, 'BYN')
                             elif m == 4:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 50, storage, single_t)
+                                give_money.money_out(card, 50, storage, single_t, 'BYN')
                             elif m == 5:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 100, storage, single_t)
+                                give_money.money_out(card, 100, storage, single_t, 'BYN')
                             else:
                                 print("\tНеверный код операции\n")
                         except ValueError:
@@ -93,22 +94,22 @@ class MenuOperations(Bankomat):
                             if f == 6:
                                 money = int(input("Введите сумму выдачи: "))
                                 give_money = GiveMoney()
-                                give_money.money_out(card, money, storage, single_t)
+                                give_money.money_out(card, money, storage, single_t, 'USD')
                             elif f == 1:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 5, storage, single_t)
+                                give_money.money_out(card, 5, storage, single_t, 'USD')
                             elif f == 2:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 10, storage, single_t)
+                                give_money.money_out(card, 10, storage, single_t, 'USD')
                             elif f == 3:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 20, storage, single_t)
+                                give_money.money_out(card, 20, storage, single_t, 'USD')
                             elif f == 4:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 50, storage, single_t)
+                                give_money.money_out(card, 50, storage, single_t, 'USD')
                             elif f == 5:
                                 give_money = GiveMoney()
-                                give_money.money_out(card, 100, storage, single_t)
+                                give_money.money_out(card, 100, storage, single_t, 'USD')
                             else:
                                 print("\tНеверный код операции\n")
                         except ValueError:
