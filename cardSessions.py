@@ -271,7 +271,6 @@ class GetMoney:
         to_card.close()
 
 # валютные операции
-# пока пусть будут
 class Currency:
     """валютные операции"""
     def print(self):
@@ -283,7 +282,7 @@ class Currency:
         print('\t5 - 777.00 (мьянманский кьят) - \t*минимальная доступная сумма: 7770 кьят')
 
         a = int(input('Выберите валюту: '))
-        value = int(input('Введите сумму: '))
+        value = float(input('Введите сумму: '))
 
         if a == 1:
             if value < 1740:
@@ -291,52 +290,60 @@ class Currency:
                 value = 0
             else:
                 value = value / 174
+                value = float('{:.2f}'.format(value))
+
         elif a == 2:
             if value < 70:
                 print('Минимально допустимая сумма: 70 квач. Попробуйте еще раз!')
                 value = 0
             else:
                 value = value / 7
+                value = float('{:.2f}'.format(value))
         elif a == 3:
             if value < 350:
                 print('Минимально допустимая сумма: 350 сом. Попробуйте еще раз!')
                 value = 0
             else:
                 value = value / 35
+                value = float('{:.2f}'.format(value))
         elif a == 4:
             if value < 110:
                 print('Минимально допустимая сумма: 110 гривен. Попробуйте еще раз!')
                 value = 0
             else:
                 value = value / 11
+                value = float('{:.2f}'.format(value))
         elif a == 5:
             if value < 7770:
                 print('Минимально допустимая сумма: 7770 кьят. Попробуйте еще раз!')
                 value = 0
             else:
                 value = value / 777
+                value = float('{:.2f}'.format(value))
         else:
-            print('Неверный номер операции! Попробуйте еще раз!')
+            print('Неверный номер операции. Попробуйте еще раз!')
 
         return value
 
     def moneyOut(self, card, money):
         card.copy_data()
 
-        if int(money) > int(card.get_balance()) or money < 0:
-            print('no')
+        if int(money) > int(card.get_balance_byn()) or money < 0:
+            print('Операция на данный момент недоступна. Повторите попытку позже')
         else:
-            new_money = int(card.get_balance()) - money
-            card.set_balance(new_money)
-            l = card.get_chosen() - 1
+            new_money = float(card.get_balance_byn()) - money
+            new_money = float('{:.2f}'.format(new_money))
+            card.set_balance_byn(new_money)
+            find = card.get_chosen() - 1
 
             from_card = open('newcard.txt', 'r')
             to_card = open('card.txt', 'w')
-            k = from_card.readline()
-            to_card.write(k)
+            amount = from_card.readline()
+            to_card.write(amount)
 
-            for i in range(0, int(k)):
-                if i == l:
+            for i in range(0, int(amount)):
+                if i == find:
+                    from_card.readline()
                     from_card.readline()
                     from_card.readline()
                     from_card.readline()
@@ -349,8 +356,11 @@ class Currency:
                     to_card.write(card.get_holder())
                     to_card.write(str(card.get_pin()) + '\n')
                     to_card.write(card.get_cvv())
-                    to_card.write(str(card.get_balance()) + '\n')
+                    to_card.write(str(card.get_balance_byn()) + '\n')
+                    to_card.write(str(card.get_balance_usd()) + '\n')
+
                 else:
+                    to_card.write(from_card.readline())
                     to_card.write(from_card.readline())
                     to_card.write(from_card.readline())
                     to_card.write(from_card.readline())
