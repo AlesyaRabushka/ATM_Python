@@ -17,9 +17,11 @@ class CardCheck:
                 print("\t     Заберите Ваш чек     ")
                 print('\t--------------------------')
                 date = datetime.now()
-                print('Date: ', date.strftime('%d-%m-%Y'))
-                print('Time: ', date.strftime('%H:%M:%S'))
-                print('Operation type: ', operation, '\n')
+                print('\tDate: ', date.strftime('%d-%m-%Y'))
+                print('\tTime: ', date.strftime('%H:%M:%S'))
+                print('\t---------------------------------')
+                print('\tOperation type: ', operation, '\n')
+                print('\t---------------------------------')
             elif t == 2:
                 pass
             else:
@@ -363,53 +365,57 @@ class Currency(CardCheck):
         print('\t5 - 777.00 (мьянманский кьят) - \t*минимальная доступная сумма: 7770 кьят')
 
         a = int(input('Выберите валюту: '))
-        value = float(input('Введите сумму: '))
+        value = input('Введите сумму: ')
+        if value.isdigit():
+            value = int(value)
+            if a == 1:
+                if value < 1740:
+                    print('Минимально допустимая сумма: 1740 тенге. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 174
+                    value = float('{:.2f}'.format(value))
 
-        if a == 1:
-            if value < 1740:
-                print('Минимально допустимая сумма: 1740 тенге. Попробуйте еще раз!')
-                value = 0
+            elif a == 2:
+                if value < 70:
+                    print('Минимально допустимая сумма: 70 квач. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 7
+                    value = float('{:.2f}'.format(value))
+            elif a == 3:
+                if value < 350:
+                    print('Минимально допустимая сумма: 350 сом. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 35
+                    value = float('{:.2f}'.format(value))
+            elif a == 4:
+                if value < 110:
+                    print('Минимально допустимая сумма: 110 гривен. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 11
+                    value = float('{:.2f}'.format(value))
+            elif a == 5:
+                if value < 7770:
+                    print('Минимально допустимая сумма: 7770 кьят. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 777
+                    value = float('{:.2f}'.format(value))
             else:
-                value = value / 174
-                value = float('{:.2f}'.format(value))
-
-        elif a == 2:
-            if value < 70:
-                print('Минимально допустимая сумма: 70 квач. Попробуйте еще раз!')
-                value = 0
-            else:
-                value = value / 7
-                value = float('{:.2f}'.format(value))
-        elif a == 3:
-            if value < 350:
-                print('Минимально допустимая сумма: 350 сом. Попробуйте еще раз!')
-                value = 0
-            else:
-                value = value / 35
-                value = float('{:.2f}'.format(value))
-        elif a == 4:
-            if value < 110:
-                print('Минимально допустимая сумма: 110 гривен. Попробуйте еще раз!')
-                value = 0
-            else:
-                value = value / 11
-                value = float('{:.2f}'.format(value))
-        elif a == 5:
-            if value < 7770:
-                print('Минимально допустимая сумма: 7770 кьят. Попробуйте еще раз!')
-                value = 0
-            else:
-                value = value / 777
-                value = float('{:.2f}'.format(value))
+                print('Неверный номер операции. Попробуйте еще раз!')
         else:
-            print('Неверный номер операции. Попробуйте еще раз!')
+            print('\t----------Неверный формат ввода данных----------')
+            return False
 
         return value
 
     def moneyOut(self, card, money):
         card.copy_data()
 
-        if int(money) > int(card.get_balance_byn()) or money < 0:
+        if money > int(card.get_balance_byn()) or money < 0:
             print('Операция на данный момент недоступна. Повторите попытку позже')
         else:
             new_money = float(card.get_balance_byn()) - money

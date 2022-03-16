@@ -97,9 +97,12 @@ class MenuOperations(Bankomat):
                             try:
                                 f = int(input())
                                 if f == 6:
-                                    money = int(input("Введите сумму выдачи: "))
-                                    give_money = GiveMoney()
-                                    give_money.money_out(card, money, storage, single_t, 'USD')
+                                    money = input("Введите сумму выдачи: ")
+                                    if money.isdigit():
+                                        give_money = GiveMoney()
+                                        give_money.money_out(card, int(money), storage, single_t, 'USD')
+                                    else:
+                                        print('\n----------Неверный формат ввода данных-----------\n')
                                 elif f == 1:
                                     give_money = GiveMoney()
                                     give_money.money_out(card, 5, storage, single_t, 'USD')
@@ -155,16 +158,19 @@ class MenuOperations(Bankomat):
                                 get_money = GetMoney()
                                 get_money.money_in(card, int(money), storage, single_t, 'USD')
                         else:
-                            print('\n----------Неверный формат ввода данных-----------\n')
+                            print('\t----------Неверный формат ввода данных-----------\n')
 
 
                     except ValueError:
-                        print('\t\n----------Неверный код операции----------\n\n')
+                        print('\n\t----------Неверный код операции----------\n\n')
 
                 elif k == 6:
                     currency = Currency()
                     money = currency.print()
-                    currency.moneyOut(card, money)
+                    if money != 0:
+                        currency.moneyOut(card, money)
+                    else:
+                        pass
 
                 # выход из проги
                 elif k == 0:

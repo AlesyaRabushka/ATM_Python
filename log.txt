@@ -930,3 +930,119 @@ Status: Success
 Operation type: Выход из системы
 Status: Success
 
+16-03-2022  12:54:15
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:54:15
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:54:19
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  12:54:59
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  12:56:26
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:56:26
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:03:55
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  13:03:55
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:03:57
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  13:04:11
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  13:06:44
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  13:06:44
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:06:58
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  13:08:35
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  13:08:35
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:09:42
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  13:09:42
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:11:20
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  13:11:20
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:11:38
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  13:11:38
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:11:46
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  13:12:12
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  13:12:12
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:12:31
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  13:13:07
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  13:13:07
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  13:13:12
+Operation type: Выдача наличных
+Status: Success
+
+16-03-2022  13:13:20
+Operation type: Выход из системы
+Status: Success
+
