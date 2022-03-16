@@ -1,18 +1,25 @@
 from exception import MyException
+from datetime import datetime
 
 
 # здесь собраны все операции с участием карточки
 # выдача чека
 class CardCheck:
     """Чек"""
-    def chek(self):
+    def chek(self, operation):
         print("Хотите ли вы забрать чек?")
         print("1 - Да")
         print("2 - Нет")
         try:
             t = int(input())
             if t == 1:
-                print("\tЗаберите Ваш чек")
+                print('\t--------------------------')
+                print("\t     Заберите Ваш чек     ")
+                print('\t--------------------------')
+                date = datetime.now()
+                print('Date: ', date.strftime('%d-%m-%Y'))
+                print('Time: ', date.strftime('%H:%M:%S'))
+                print('Operation type: ', operation, '\n')
             elif t == 2:
                 pass
             else:
@@ -70,6 +77,7 @@ class GiveMoney:
                                 from_card.readline()
                                 from_card.readline()
                                 from_card.readline()
+                                from_card.readline()
 
                                 to_card.write(card.get_number())
                                 to_card.write(card.get_data())
@@ -92,7 +100,7 @@ class GiveMoney:
                         to_card.close()
                         # выдача чека
                         c = CardCheck()
-                        c.chek()
+                        c.chek('Выдача наличных')
 
             # ветка USD
             else:
@@ -160,11 +168,9 @@ class GiveMoney:
                         to_card.close()
                         # выдача чека
                         c = CardCheck()
-                        c.chek()
+                        c.chek('Выдача наличных')
         except ValueError:
             print('\t----------Неверный код операции----------')
-
-
 
 
 class ChangePin(MyException):
@@ -236,52 +242,115 @@ class ChangePin(MyException):
 #деньги на бочку!
 class GetMoney:
     """пополнение денежных средств"""
-    def money_in(self, card, money: int, bankomat_storage, single_t):
-        new_money = int(card.get_balance()) + money
-        find = int(card.get_chosen()) - 1
-        single_t.log('Пополнение счета', True,'')
+    def money_in(self, card, money: int, bankomat_storage, single_t, currency):
+        # ветка бунов
+        if currency == 'BYN':
+            new_money = float(card.get_balance_byn()) + money
+            find = int(card.get_chosen()) - 1
+            single_t.log('Пополнение счета', True,'')
 
-        # пополнение средств хранилища
-        storage = bankomat_storage.get_storage()
-        bankomat_storage.set_storage(storage + money)
-        file = open('bankomat.txt', 'w')
-        file.write(str(bankomat_storage.get_storage()))
-        file.close()
+            # пополнение средств хранилища
+            storage = bankomat_storage.get_storage_byn()
+            bankomat_storage.set_storage_byn(storage + money)
+            file = open('bankomat.txt', 'w')
+            file.write(str(bankomat_storage.get_storage_byn()))
+            file.write(str(bankomat_storage.get_storage_usd()))
+            file.close()
 
-        # изменение данных о средствах пользователя
-        card.copy_data()
-        from_card = open('newcard.txt')
-        to_card = open('card.txt', 'w')
-        amount = from_card.readline()
-        to_card.write(amount)
-        for i in range(0, int(amount)):
-            if i == find:
-                from_card.readline()
-                from_card.readline()
-                from_card.readline()
-                from_card.readline()
-                from_card.readline()
-                from_card.readline()
+            # изменение данных о средствах пользователя
+            card.copy_data()
+            from_card = open('newcard.txt')
+            to_card = open('card.txt', 'w')
+            amount = from_card.readline()
+            to_card.write(amount)
+            for i in range(0, int(amount)):
+                if i == find:
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
 
-                to_card.write(card.get_number())
-                to_card.write(card.get_data())
-                to_card.write(card.get_holder())
-                to_card.write(str(card.get_pin()) + '\n')
-                to_card.write(card.get_cvv())
-                card.set_balance(new_money)
-                to_card.write(str(new_money) + '\n')
-            else:
-                to_card.write(str(from_card.readline()))
-                to_card.write(str(from_card.readline()))
-                to_card.write(str(from_card.readline()))
-                to_card.write(str(from_card.readline()))
-                to_card.write(str(from_card.readline()))
-                to_card.write(str(from_card.readline()))
-        from_card.close()
-        to_card.close()
+                    to_card.write(card.get_number())
+                    to_card.write(card.get_data())
+                    to_card.write(card.get_holder())
+                    to_card.write(str(card.get_pin()) + '\n')
+                    to_card.write(card.get_cvv())
+                    card.set_balance_byn(new_money)
+                    to_card.write(str(new_money) + '\n')
+                    to_card.write(str(card.get_balance_usd()) + '\n')
+
+                else:
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+            from_card.close()
+            to_card.close()
+            # выдача чека
+            c = CardCheck()
+            c.chek('Пополнение счета')
+        # ветка американ деньги
+        elif currency == 'USD':
+            new_money = float(card.get_balance_usd()) + money
+            find = int(card.get_chosen()) - 1
+            single_t.log('Пополнение счета', True, '')
+
+            # пополнение средств хранилища
+            storage = bankomat_storage.get_storage_usd()
+            bankomat_storage.set_storage_usd(storage + money)
+
+            file = open('bankomat.txt', 'w')
+            file.write(str(bankomat_storage.get_storage_byn()))
+            file.write(str(bankomat_storage.get_storage_usd()))
+            file.close()
+
+            # изменение данных о средствах пользователя
+            card.copy_data()
+            from_card = open('newcard.txt')
+            to_card = open('card.txt', 'w')
+            amount = from_card.readline()
+            to_card.write(amount)
+            for i in range(0, int(amount)):
+                if i == find:
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+                    from_card.readline()
+
+                    to_card.write(card.get_number())
+                    to_card.write(card.get_data())
+                    to_card.write(card.get_holder())
+                    to_card.write(str(card.get_pin()) + '\n')
+                    to_card.write(card.get_cvv())
+                    card.set_balance_usd(new_money)
+                    to_card.write(str(card.get_balance_byn()) + '\n')
+                    to_card.write(str(new_money) + '\n')
+
+                else:
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+                    to_card.write(str(from_card.readline()))
+            from_card.close()
+            to_card.close()
+            # выдача чека
+            c = CardCheck()
+            c.chek('Пополнение счета')
 
 # валютные операции
-class Currency:
+class Currency(CardCheck):
     """валютные операции"""
     def print(self):
         print('КУРС ВАЛЮТ')
@@ -379,6 +448,10 @@ class Currency:
                     to_card.write(from_card.readline())
             from_card.close()
             to_card.close()
+
+            # выдача чека
+            c = CardCheck()
+            c.chek('Валютные операции')
 
 
 class Telephone(GiveMoney):
