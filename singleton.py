@@ -16,6 +16,6 @@ class Singleton():
         if status == 1:
             fo.write("Status: Success\n\n")
         else:
-            fo.write('Status: Fail')
-            fo.write(error_type + '\n\n')
+            fo.write('Status: Fail\n')
+            fo.write('Error type: ' + error_type + '\n\n')
         fo.close()
