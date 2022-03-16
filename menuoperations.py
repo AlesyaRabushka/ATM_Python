@@ -2,6 +2,7 @@ from cardSessions import GiveMoney
 from cardSessions import ChangePin
 from cardSessions import GetMoney
 from cardSessions import Telephone, Currency
+from cardSessions import Currency_transactions
 
 from bankomat import Bankomat
 
@@ -29,6 +30,7 @@ class MenuOperations(Bankomat):
             print("\t4 - Смена пин-кода")
             print("\t5 - Добавить средства на карточку")
             print("\t6 - Обмен валют")
+            print("\t7 - Перевод между счетами")
             print("\t0 - Забрать карту и закончить работу")
 
             try:
@@ -172,6 +174,24 @@ class MenuOperations(Bankomat):
                     else:
                         pass
 
+                elif k == 7:
+                    try:
+                        print('Выберите счет на который хотите перевести: ')
+                        print('1 - BUN')
+                        print('2 - USD')
+                        g = int(input())
+                        if g == 1:
+                            money=float(input('Введите сумму: '))
+                            transaction=Currency_transactions()
+                            transaction.fromUSDtoBUN(card,money)
+                        elif g == 2:
+                            money = float(input('Введите сумму: '))
+                            transaction = Currency_transactions()
+                            transaction.fromBUNtoUSD(card, money)
+                        else:
+                            print('----------Неверный код операции----------\n\n')
+                    except ValueError:
+                        print('\n\t----------Неверный код операции----------\n\n')
                 # выход из проги
                 elif k == 0:
                     single_t.log('Выход из системы', True,'')
