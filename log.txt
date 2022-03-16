@@ -786,3 +786,147 @@ Status: Success
 Operation type: Данные банковской карты
 Status: Success
 
+16-03-2022  12:30:04
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:30:04
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:30:12
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  12:38:12
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:38:12
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:38:13
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  12:38:31
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  12:39:04
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:39:04
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:39:05
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  12:39:15
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  12:40:55
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:40:55
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:40:56
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  12:41:03
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  12:41:31
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:41:31
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:41:41
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  12:43:06
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:43:06
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:48:14
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:48:14
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:48:22
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  12:49:01
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:49:01
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:49:25
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:49:25
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:49:33
+Operation type: Выдача наличных
+Status: Success
+
+16-03-2022  12:49:37
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  12:49:44
+Operation type: Выдача наличных
+Status: Success
+
+16-03-2022  12:49:46
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  12:49:54
+Operation type: Выход из системы
+Status: Success
+
+16-03-2022  12:51:34
+Operation type: Ввод пин-код
+Status: Success
+
+16-03-2022  12:51:34
+Operation type: Вход в систему
+Status: Success
+
+16-03-2022  12:51:36
+Operation type: Данные банковской карты
+Status: Success
+
+16-03-2022  12:51:49
+Operation type: Выход из системы
+Status: Success
+

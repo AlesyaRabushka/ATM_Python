@@ -57,10 +57,15 @@ class MenuOperations(Bankomat):
 
                             try:
                                 m = int(input())
+
                                 if m == 6:
-                                     money = int(input("Введите сумму выдачи: "))
-                                     give_money = GiveMoney()
-                                     give_money.money_out(card, money, storage, single_t, 'BYN')
+                                     money = input("Введите сумму выдачи: ")
+                                     if money.isdigit():
+                                         give_money = GiveMoney()
+                                         give_money.money_out(card, int(money), storage, single_t, 'BYN')
+                                     else:
+                                         print('\n----------Неверный формат ввода данных-----------\n')
+
                                 elif m == 1:
                                     give_money = GiveMoney()
                                     give_money.money_out(card, 5, storage, single_t, 'BYN')
@@ -78,6 +83,7 @@ class MenuOperations(Bankomat):
                                     give_money.money_out(card, 100, storage, single_t, 'BYN')
                                 else:
                                     print("\t----------Неверный код операции----------\n")
+
                             except ValueError:
                                 print("\t----------Неверный код операции----------\n\n")
                         elif s == 2:
@@ -140,13 +146,17 @@ class MenuOperations(Bankomat):
                     print('2 - USD')
                     try:
                         choose_money = int(input())
-                        money = int(input('Вставьте купюру: '))
-                        if choose_money == 1:
-                            get_money = GetMoney()
-                            get_money.money_in(card, money, storage, single_t, 'BYN')
-                        elif choose_money == 2:
-                            get_money = GetMoney()
-                            get_money.money_in(card, money, storage, single_t, 'USD')
+                        money = input('Вставьте купюру: ')
+                        if money.isdigit():
+                            if choose_money == 1:
+                                get_money = GetMoney()
+                                get_money.money_in(card, int(money), storage, single_t, 'BYN')
+                            elif choose_money == 2:
+                                get_money = GetMoney()
+                                get_money.money_in(card, int(money), storage, single_t, 'USD')
+                        else:
+                            print('\n----------Неверный формат ввода данных-----------\n')
+
 
                     except ValueError:
                         print('\t\n----------Неверный код операции----------\n\n')

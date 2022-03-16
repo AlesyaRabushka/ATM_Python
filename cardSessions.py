@@ -30,7 +30,7 @@ class CardCheck:
 #выдача деняк
 class GiveMoney:
     """выдача наличных"""
-    def money_out(self, card, money: int, bankomat_storage, single_t, currency):
+    def money_out(self, card, money, bankomat_storage, single_t, currency):
         card.copy_data()
 
         try:
@@ -39,9 +39,10 @@ class GiveMoney:
                 storage = bankomat_storage.get_storage_byn()
 
                 # проверяем, достаточно ли средств в банкомате
+
                 if money > storage:
-                    print('\t----------Лимит средств превышен!----------\n')
-                    single_t.log('Выдача наличных', False, ' Лимит средств превышен')
+                        print('\t----------Лимит средств превышен!----------\n')
+                        single_t.log('Выдача наличных', False, ' Лимит средств превышен')
                 else:
                     if money > int(card.get_balance_byn()):
                         print('\t----------Недостаточно средств----------\n')
@@ -49,6 +50,7 @@ class GiveMoney:
                     elif money < 0:
                         print('\t----------Неверный формат ввода----------\n')
                         single_t.log('Выдача наличных', False, ' Неверный формат ввода')
+
                     else:
                         # изменяем количество средств хранилища
                         bankomat_storage.set_storage_byn(storage - money)
