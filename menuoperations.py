@@ -3,7 +3,7 @@ from cardSessions import ChangePin
 from cardSessions import GetMoney
 from cardSessions import Telephone, Currency
 from cardSessions import Currency_transactions
-
+import math
 from bankomat import Bankomat
 
 
@@ -133,9 +133,15 @@ class MenuOperations(Bankomat):
                     print('1 - +375 44 730 81 28\n2 - +375 33 895 12 04\n3 - +375 25 234 10 23')
                     tel = int(input('Выберите номер телефона: '))
                     if tel == 1 or tel == 2 or tel == 3:
-                        money = int(input("Введите сумму платежа: "))
-                        telephone = Telephone()
-                        telephone.telephone_pay(card, money, tel, storage, single_t)
+                        money = float(input("Введите сумму платежа: "))
+                        new_money = money * 1000
+                        round(new_money,3)
+                        if new_money % 10 != 0:
+                            print('Invalid value ')
+                            pass
+                        else:
+                             telephone = Telephone()
+                             telephone.telephone_pay(card, money, tel, storage, single_t)
                     else:
                         print('\t----------Неверный код операции. Повторите попытку позже.----------\n')
                         single_t.log('Пополнение счета телефона', False, 'Неверный номер операции')
@@ -176,18 +182,29 @@ class MenuOperations(Bankomat):
 
                 elif k == 7:
                     try:
-                        print('Выберите счет на который хотите перевести: ')
-                        print('1 - BUN')
+                        print('Выберите счет, на который хотите перевести: ')
+                        print('1 - BYN')
                         print('2 - USD')
                         g = int(input())
                         if g == 1:
-                            money=float(input('Введите сумму: '))
-                            transaction=Currency_transactions()
-                            transaction.fromUSDtoBUN(card,money)
+                            money = float(input('Введите сумму (BYN): '))
+                            new_money = money * 1000
+                            if new_money % 10 != 0:
+                                print('Invalid value ')
+                                pass
+                            else:
+
+                                transaction=Currency_transactions()
+                                transaction.fromUSDtoBUN(card,money)
                         elif g == 2:
-                            money = float(input('Введите сумму: '))
-                            transaction = Currency_transactions()
-                            transaction.fromBUNtoUSD(card, money)
+                            money = float(input('Введите сумму (USD): '))
+                            if money % 10 != 0:
+                                print('Invalid value ')
+                                pass
+                            else:
+
+                                transaction = Currency_transactions()
+                                transaction.fromBUNtoUSD(card, money)
                         else:
                             print('----------Неверный код операции----------\n\n')
                     except ValueError:
