@@ -1697,3 +1697,20 @@ Status: Success
 Operation type: Выход из системы
 Status: Success
 
+17-03-2022  12:36:43
+Operation type: Ввод пин-код
+Status: Fail
+Error type: Неверный пин-код
+
+17-03-2022  12:36:49
+Operation type: Ввод пин-код
+Status: Success
+
+17-03-2022  12:36:49
+Operation type: Вход в систему
+Status: Success
+
+17-03-2022  12:36:50
+Operation type: Выход из системы
+Status: Success
+
