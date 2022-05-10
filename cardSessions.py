@@ -1,8 +1,8 @@
+from exception import MyException
 from datetime import datetime
 
+
 # здесь собраны все операции с участием карточки
-
-
 # выдача чека
 class CardCheck:
     """Чек"""
@@ -20,8 +20,8 @@ class CardCheck:
                 print('\tDate: ', date.strftime('%d-%m-%Y'))
                 print('\tTime: ', date.strftime('%H:%M:%S'))
                 print('\t---------------------------------')
-                print('\tOperation type: ', operation)
-                print('\t---------------------------------\n')
+                print('\tOperation type: ', operation, '\n')
+                print('\t---------------------------------')
             elif t == 2:
                 pass
             else:
@@ -29,7 +29,7 @@ class CardCheck:
         except ValueError:
             print("\t----------Неверный код операции----------")
 
-#выдача денег
+#выдача деняк
 class GiveMoney:
     """выдача наличных"""
     def money_out(self, card, money, bankomat_storage, single_t, currency):
@@ -176,8 +176,8 @@ class GiveMoney:
         except ValueError:
             print('\t----------Неверный код операции----------')
 
-# смена пароля
-class ChangePin:
+
+class ChangePin(MyException):
     """смена пин-код"""
     @staticmethod
     def change_card_pin(card, pin: int, single_t):
@@ -192,7 +192,7 @@ class ChangePin:
 
                         # проверка, что пин-код содержит не более 4х символов
                         if len(str(new_pin)) != 4:
-                            print('Неверный ввод пин-код. Попробуйте ещё раз!')
+                            raise MyException('Неверный ввод пин-код. Попробуйте ещё раз!')
 
                         else:
                             card.set_pin(new_pin)
@@ -212,14 +212,17 @@ class ChangePin:
                                     from_card.readline()
                                     from_card.readline()
                                     from_card.readline()
+                                    from_card.readline()
 
                                     to_card.write(card.get_number())
                                     to_card.write(card.get_data())
                                     to_card.write(card.get_holder())
                                     to_card.write(str(card.get_pin()) + '\n')
                                     to_card.write(card.get_cvv())
-                                    to_card.write(str(card.get_balance()) + '\n')
+                                    to_card.write(str(card.get_balance_byn()) + '\n')
+                                    to_card.write(str(card.get_balance_usd()) + '\n')
                                 else:
+                                    to_card.write(from_card.readline())
                                     to_card.write(from_card.readline())
                                     to_card.write(from_card.readline())
                                     to_card.write(from_card.readline())
@@ -243,7 +246,7 @@ class ChangePin:
                 print('Неверный пин-код. Попробуйте ещё раз! Осталось попыток: ' + str(i-1))
                 single_t.log('Смена пин-код', False, ' Неверный пин-код')
 
-#пополнение счёта
+#деньги на бочку!
 class GetMoney:
     """пополнение денежных средств"""
     def money_in(self, card, money: int, bankomat_storage, single_t, currency):
@@ -367,48 +370,45 @@ class Currency(CardCheck):
         a = int(input('Выберите валюту: '))
         value = input('Введите сумму: ')
         if value.isdigit():
-            try:
-                value = int(value)
-                if a == 1:
-                    if value < 1740:
-                        print('Минимально допустимая сумма: 1740 тенге. Попробуйте еще раз!')
-                        value = 0
-                    else:
-                        value = value / 174
-                        value = float('{:.2f}'.format(value))
-
-                elif a == 2:
-                    if value < 70:
-                        print('Минимально допустимая сумма: 70 квач. Попробуйте еще раз!')
-                        value = 0
-                    else:
-                        value = value / 7
-                        value = float('{:.2f}'.format(value))
-                elif a == 3:
-                    if value < 350:
-                        print('Минимально допустимая сумма: 350 сом. Попробуйте еще раз!')
-                        value = 0
-                    else:
-                        value = value / 35
-                        value = float('{:.2f}'.format(value))
-                elif a == 4:
-                    if value < 110:
-                        print('Минимально допустимая сумма: 110 гривен. Попробуйте еще раз!')
-                        value = 0
-                    else:
-                        value = value / 11
-                        value = float('{:.2f}'.format(value))
-                elif a == 5:
-                    if value < 7770:
-                        print('Минимально допустимая сумма: 7770 кьят. Попробуйте еще раз!')
-                        value = 0
-                    else:
-                        value = value / 777
-                        value = float('{:.2f}'.format(value))
+            value = int(value)
+            if a == 1:
+                if value < 1740:
+                    print('Минимально допустимая сумма: 1740 тенге. Попробуйте еще раз!')
+                    value = 0
                 else:
-                    print('Неверный номер операции. Попробуйте еще раз!')
-            except:
-                print('Неверный номер операции')
+                    value = value / 174
+                    value = float('{:.2f}'.format(value))
+
+            elif a == 2:
+                if value < 70:
+                    print('Минимально допустимая сумма: 70 квач. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 7
+                    value = float('{:.2f}'.format(value))
+            elif a == 3:
+                if value < 350:
+                    print('Минимально допустимая сумма: 350 сом. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 35
+                    value = float('{:.2f}'.format(value))
+            elif a == 4:
+                if value < 110:
+                    print('Минимально допустимая сумма: 110 гривен. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 11
+                    value = float('{:.2f}'.format(value))
+            elif a == 5:
+                if value < 7770:
+                    print('Минимально допустимая сумма: 7770 кьят. Попробуйте еще раз!')
+                    value = 0
+                else:
+                    value = value / 777
+                    value = float('{:.2f}'.format(value))
+            else:
+                print('Неверный номер операции. Попробуйте еще раз!')
         else:
             print('\t----------Неверный формат ввода данных----------')
             return False
@@ -464,13 +464,12 @@ class Currency(CardCheck):
             c = CardCheck()
             c.chek('Валютные операции')
 
-#оплата счета телефона
+
 class Telephone(GiveMoney):
     """оплата телефона"""
 
-    def telephone_pay(self, card, money, tel_number: int, bankomat_storage, single_t):
-        money = float('{:.2f}'.format(money))
-        self.money_out(card, money, bankomat_storage, single_t, "BYN")
+    def telephone_pay(self, card, money: int, tel_number: int, bankomat_storage, single_t):
+        self.money_out(card, money, bankomat_storage, single_t)
         self.copy_data()
 
         from_card = open('newtelephone.txt', 'r')
@@ -482,8 +481,8 @@ class Telephone(GiveMoney):
         for i in range(0, int(k)):
             if i == tel_number - 1:
                 number = from_card.readline()
-                balance = float(from_card.readline())
-                new_money = balance + money
+                balance = int(from_card.readline())
+
                 to_card.write(number)
                 to_card.write(str(balance + money) + '\n')
             else:
@@ -505,7 +504,6 @@ class Telephone(GiveMoney):
         card.close()
         new_card.close()
 
-# переводы с одного счета на другой
 class Currency_transactions:
     def fromBUNtoUSD(self,card,value:float):
         card.copy_data()
@@ -515,7 +513,6 @@ class Currency_transactions:
             new_value = float(card.get_balance_byn())-(value*3.31)
             new_value = float('{:.2f}'.format(new_value))
             cur_new_value=float(card.get_balance_usd())+value
-            cur_new_value = float('{:.2f}'.format(cur_new_value))
             card.set_balance_usd(cur_new_value)
             card.set_balance_byn(new_value)
             find = card.get_chosen() - 1
@@ -565,7 +562,6 @@ class Currency_transactions:
         else:
             new_value = float(card.get_balance_usd()) - (value / 3.31)
             cur_new_value = float(card.get_balance_byn()) + value
-            cur_new_value = float('{:.2f}'.format(cur_new_value))
             new_value = float('{:.2f}'.format(new_value))
             card.set_balance_usd(new_value)
             card.set_balance_byn(cur_new_value)
